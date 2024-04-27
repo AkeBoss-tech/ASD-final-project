@@ -1,6 +1,8 @@
-[gd_scene load_steps=13 format=3 uid="uid://cx4oc67e351vo"]
+[gd_scene load_steps=14 format=3 uid="uid://cx4oc67e351vo"]
 
 [ext_resource type="Script" path="res://player.gd" id="1_aydre"]
+
+[sub_resource type="PhysicsMaterial" id="PhysicsMaterial_x371t"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_unohi"]
 resource_name = "carTire"
@@ -105,7 +107,6 @@ metallic = 1.0
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_5af8w"]
 resource_name = "_defaultMat"
-albedo_color = Color(1, 1, 1, 1)
 metallic = 1.0
 
 [sub_resource type="ArrayMesh" id="ArrayMesh_goa5y"]
@@ -210,15 +211,22 @@ shadow_mesh = SubResource("ArrayMesh_goa5y")
 points = PackedVector3Array(0.6, 0.099996, 0.43448, 0.349922, 0.536016, 1.27989, 0.6, 0, 0.43448, 0.6, 0.099996, -0.165624, 0.549961, 0.388529, -0.0656481, -0.350039, 0.536016, 1.27989, 0.349922, 0, 1.27989, 0.549961, 0.388529, -0.165624, 0.0669538, 0.632544, 0.102982, 0.0669538, 0.632544, 0.202958, 0.6, 0, -0.165624, 0.449883, 0.149963, -1.27989, -0.6, 0.099996, 0.43448, -0.350039, 0, 1.27989, -0.0670713, 0.632544, 0.202958, -0.0670713, 0.632544, 0.102982, -0.550078, 0.388529, -0.165624, -0.550078, 0.388529, -0.0656481, 0.449883, 0, -1.27989, -0.450117, 0.149963, -1.27989, -0.6, 0, 0.43448, -0.6, 0.099996, -0.165624, -0.450117, 0, -1.27989, -0.6, 0, -0.165624)
 
 [node name="race" type="VehicleBody3D"]
-gravity_scale = 4.0
+mass = 80.0
+physics_material_override = SubResource("PhysicsMaterial_x371t")
+gravity_scale = 2.0
 script = ExtResource("1_aydre")
 
 [node name="FrontRIght" type="VehicleWheel3D" parent="."]
 transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 0.35, 0.3, -0.639886)
 use_as_steering = true
-wheel_roll_influence = 0.01
+wheel_roll_influence = 1.0
+wheel_radius = 0.3
 wheel_rest_length = 0.2
 wheel_friction_slip = 1.4
+suspension_travel = 0.1
+suspension_stiffness = 150.0
+damping_compression = 0.5
+damping_relaxation = 0.7
 
 [node name="wheel_frontRight" type="MeshInstance3D" parent="FrontRIght"]
 transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 0, 0, 0)
@@ -229,9 +237,14 @@ skeleton = NodePath("")
 [node name="FrontLeft" type="VehicleWheel3D" parent="."]
 transform = Transform3D(-1, 0, 8.74228e-08, 0, 1, 0, -8.74228e-08, 0, -1, -0.35, 0.3, -0.639886)
 use_as_steering = true
-wheel_roll_influence = 0.01
+wheel_roll_influence = 1.0
+wheel_radius = 0.3
 wheel_rest_length = 0.2
 wheel_friction_slip = 1.4
+suspension_travel = 0.1
+suspension_stiffness = 150.0
+damping_compression = 0.5
+damping_relaxation = 0.7
 
 [node name="wheel_frontLeft" type="MeshInstance3D" parent="FrontLeft"]
 gi_mode = 0
@@ -241,10 +254,13 @@ skeleton = NodePath("")
 [node name="BackRight" type="VehicleWheel3D" parent="."]
 transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 0.35, 0.3, 0.88)
 use_as_traction = true
-wheel_roll_influence = 0.01
+wheel_roll_influence = 1.0
+wheel_radius = 0.3
 wheel_friction_slip = 1.1
-suspension_travel = 0.15
-suspension_stiffness = 80.0
+suspension_travel = 0.1
+suspension_stiffness = 150.0
+damping_compression = 0.5
+damping_relaxation = 0.7
 
 [node name="wheel_backRight" type="MeshInstance3D" parent="BackRight"]
 transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 0, 0, 0)
@@ -255,10 +271,13 @@ skeleton = NodePath("")
 [node name="BackLeft" type="VehicleWheel3D" parent="."]
 transform = Transform3D(-1, 0, 8.74228e-08, 0, 1, 0, -8.74228e-08, 0, -1, -0.35, 0.3, 0.880114)
 use_as_traction = true
-wheel_roll_influence = 0.01
+wheel_roll_influence = 1.0
+wheel_radius = 0.3
 wheel_friction_slip = 1.1
-suspension_travel = 0.15
-suspension_stiffness = 80.0
+suspension_travel = 0.1
+suspension_stiffness = 150.0
+damping_compression = 0.5
+damping_relaxation = 0.7
 
 [node name="wheel_backLeft" type="MeshInstance3D" parent="BackLeft"]
 gi_mode = 0
@@ -266,7 +285,7 @@ mesh = SubResource("ArrayMesh_dbsj4")
 skeleton = NodePath("")
 
 [node name="body" type="MeshInstance3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.35088e-13, 0.1, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.35088e-13, 0.167081, 0)
 gi_mode = 0
 mesh = SubResource("ArrayMesh_mx80w")
 skeleton = NodePath("")
@@ -277,4 +296,5 @@ visible = false
 shape = SubResource("ConvexPolygonShape3D_v5m14")
 
 [node name="Camera3D" type="Camera3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.193, 3)
+transform = Transform3D(1, 0, 0, 0, 0.976672, 0.214735, 0, -0.214735, 0.976672, 0, 1.5, 3)
+fov = 67.5

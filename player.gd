@@ -1,7 +1,7 @@
 extends VehicleBody3D
 
 const MAX_STEER = 0.8
-const ENGINE_POWER = 500
+const ENGINE_POWER = 300
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
