@@ -11,10 +11,10 @@ size = Vector3(146.349, 1, 100)
 [node name="world" type="Node3D"]
 
 [node name="track_2" parent="." instance=ExtResource("1_dw630")]
-transform = Transform3D(4, 0, 0, 0, 4, 0, 0, 0, 4, 0, -0.0841339, 0)
+transform = Transform3D(8, 0, 0, 0, 4, 0, 0, 0, 8, 0, -0.0841339, 0)
 
 [node name="race" parent="." instance=ExtResource("2_775sa")]
-transform = Transform3D(0.025863, 0, 0.999666, 0, 1, 0, -0.999666, 0, 0.025863, 0.0662842, 3.79324, 5.67561)
+transform = Transform3D(0.025863, 0, 0.999666, 0, 1, 0, -0.999666, 0, 0.025863, 0.0662842, 0.81511, 11.7188)
 
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 57.093, 9.91325, -84.6299)
