@@ -207,11 +207,11 @@ _surfaces = [{
 blend_shape_mode = 0
 shadow_mesh = SubResource("ArrayMesh_goa5y")
 
-[sub_resource type="ConvexPolygonShape3D" id="ConvexPolygonShape3D_v5m14"]
-points = PackedVector3Array(0.6, 0.099996, 0.43448, 0.349922, 0.536016, 1.27989, 0.6, 0, 0.43448, 0.6, 0.099996, -0.165624, 0.549961, 0.388529, -0.0656481, -0.350039, 0.536016, 1.27989, 0.349922, 0, 1.27989, 0.549961, 0.388529, -0.165624, 0.0669538, 0.632544, 0.102982, 0.0669538, 0.632544, 0.202958, 0.6, 0, -0.165624, 0.449883, 0.149963, -1.27989, -0.6, 0.099996, 0.43448, -0.350039, 0, 1.27989, -0.0670713, 0.632544, 0.202958, -0.0670713, 0.632544, 0.102982, -0.550078, 0.388529, -0.165624, -0.550078, 0.388529, -0.0656481, 0.449883, 0, -1.27989, -0.450117, 0.149963, -1.27989, -0.6, 0, 0.43448, -0.6, 0.099996, -0.165624, -0.450117, 0, -1.27989, -0.6, 0, -0.165624)
+[sub_resource type="ConvexPolygonShape3D" id="ConvexPolygonShape3D_0kdd3"]
+points = PackedVector3Array(0.6, 0.099996, 0.434479, 0.549961, 0.388529, -0.06565, 0.349922, 0.536016, 1.27989, 0.6, 0, 0.434479, 0.6, 0.099996, -0.165626, 0.549961, 0.388529, -0.165626, 0.349922, 0, 1.27989, 0.349922, 0.536016, 1.27964, 0.0669538, 0.632544, 0.202956, -0.350039, 0.536016, 1.27989, 0.6, 0, -0.165626, 0.449883, 0.149963, -1.27989, 0.0669538, 0.632544, 0.102981, -0.350039, 0, 1.27989, -0.0670713, 0.632544, 0.202956, -0.350039, 0.536016, 1.27964, -0.550078, 0.388529, -0.06565, -0.6, 0.099996, 0.434479, 0.449883, 0, -1.27989, -0.450117, 0.149963, -1.27989, -0.0670713, 0.632544, 0.102981, -0.6, 0, 0.434479, -0.550078, 0.388529, -0.165626, -0.6, 0.099996, -0.165626, -0.450117, 0, -1.27989, -0.6, 0, -0.165626)
 
 [node name="race" type="VehicleBody3D"]
-mass = 35.0
+mass = 300.0
 physics_material_override = SubResource("PhysicsMaterial_x371t")
 gravity_scale = 2.0
 center_of_mass_mode = 1
@@ -224,9 +224,9 @@ use_as_steering = true
 wheel_roll_influence = 1.5
 wheel_radius = 0.3
 wheel_rest_length = 0.05
-wheel_friction_slip = 10.0
+wheel_friction_slip = 175.0
 suspension_travel = 0.025
-suspension_stiffness = 300.0
+suspension_stiffness = 500.0
 damping_compression = 0.7
 damping_relaxation = 0.7
 
@@ -242,9 +242,9 @@ use_as_steering = true
 wheel_roll_influence = 1.5
 wheel_radius = 0.3
 wheel_rest_length = 0.05
-wheel_friction_slip = 10.0
+wheel_friction_slip = 175.0
 suspension_travel = 0.025
-suspension_stiffness = 300.0
+suspension_stiffness = 500.0
 damping_compression = 0.7
 damping_relaxation = 0.7
 
@@ -259,9 +259,9 @@ use_as_traction = true
 wheel_roll_influence = 1.5
 wheel_radius = 0.3
 wheel_rest_length = 0.05
-wheel_friction_slip = 10.0
+wheel_friction_slip = 175.0
 suspension_travel = 0.025
-suspension_stiffness = 500.0
+suspension_stiffness = 700.0
 damping_compression = 0.7
 damping_relaxation = 0.7
 
@@ -277,9 +277,9 @@ use_as_traction = true
 wheel_roll_influence = 1.5
 wheel_radius = 0.3
 wheel_rest_length = 0.05
-wheel_friction_slip = 10.0
+wheel_friction_slip = 175.0
 suspension_travel = 0.025
-suspension_stiffness = 500.0
+suspension_stiffness = 700.0
 damping_compression = 0.7
 damping_relaxation = 0.7
 
@@ -295,9 +295,13 @@ mesh = SubResource("ArrayMesh_mx80w")
 skeleton = NodePath("")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.35088e-13, 0.1, 0)
-shape = SubResource("ConvexPolygonShape3D_v5m14")
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.35088e-13, 0.167081, 0)
+shape = SubResource("ConvexPolygonShape3D_0kdd3")
 
-[node name="Camera3D" type="Camera3D" parent="."]
+[node name="CameraPivot" type="Node3D" parent="."]
+top_level = true
+
+[node name="Camera3D" type="Camera3D" parent="CameraPivot"]
 transform = Transform3D(1, 0, 0, 0, 0.976672, 0.214735, 0, -0.214735, 0.976672, 0, 1.5, 3)
+current = true
 fov = 67.5

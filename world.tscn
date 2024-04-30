@@ -1,20 +1,18 @@
-[gd_scene load_steps=5 format=3 uid="uid://66ip25b6myac"]
+[gd_scene load_steps=4 format=3 uid="uid://66ip25b6myac"]
 
 [ext_resource type="PackedScene" uid="uid://ijwvc0wfeehw" path="res://track_2.tscn" id="1_dw630"]
+[ext_resource type="Script" path="res://world.gd" id="1_kb0y1"]
 [ext_resource type="PackedScene" uid="uid://cx4oc67e351vo" path="res://player.tscn" id="2_775sa"]
 
-[sub_resource type="PhysicsMaterial" id="PhysicsMaterial_x5y4v"]
-
-[sub_resource type="BoxShape3D" id="BoxShape3D_ik37u"]
-size = Vector3(146.349, 1, 100)
-
 [node name="world" type="Node3D"]
+script = ExtResource("1_kb0y1")
 
 [node name="track_2" parent="." instance=ExtResource("1_dw630")]
-transform = Transform3D(8, 0, 0, 0, 4, 0, 0, 0, 8, 0, -0.0841339, 0)
+transform = Transform3D(8, 0, 0, 0, 8, 0, 0, 0, 8, 0, -0.0841339, 0)
 
 [node name="race" parent="." instance=ExtResource("2_775sa")]
-transform = Transform3D(0.025863, 0, 0.999666, 0, 1, 0, -0.999666, 0, 0.025863, 0.0662842, 0.81511, 11.7188)
+transform = Transform3D(0.025863, 0, 0.999666, 0, 1, 0, -0.999666, 0, 0.025863, 0.0662842, 1.05702, 11.7188)
+center_of_mass = Vector3(0, 0, 0)
 
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 57.093, 9.91325, -84.6299)
@@ -24,13 +22,6 @@ visible = false
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.294731, 59.8689, -24.849)
 visible = false
 light_energy = 16.0
-
-[node name="RigidBody3D" type="RigidBody3D" parent="."]
-physics_material_override = SubResource("PhysicsMaterial_x5y4v")
-
-[node name="CollisionShape3D" type="CollisionShape3D" parent="RigidBody3D"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -7.60222, -0.0493631, -30.2643)
-shape = SubResource("BoxShape3D_ik37u")
 
 [node name="DirectionalLight3D2" type="DirectionalLight3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 57.093, 14.8967, -1.27869)
