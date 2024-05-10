@@ -16,7 +16,6 @@ metallic = 1.0
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_dhnd5"]
 resource_name = "_defaultMat"
-albedo_color = Color(1, 1, 1, 1)
 metallic = 1.0
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_gm24o"]
@@ -323,6 +322,13 @@ top_level = true
 transform = Transform3D(1, 0, 0, 0, 0.976672, 0.214735, 0, -0.214735, 0.976672, 0, 2, 3)
 current = true
 fov = 73.9
+
+[node name="RichTextLabel" type="RichTextLabel" parent="CameraPivot/Camera3D"]
+offset_left = 278.0
+offset_top = 143.0
+offset_right = 499.0
+offset_bottom = 276.0
+text = "Hey bro"
 
 [node name="FrontRight" type="VehicleWheel3D" parent="."]
 transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 0.35, 0.3, -0.654773)

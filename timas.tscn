@@ -1,0 +1,58 @@
+[gd_scene load_steps=7 format=3 uid="uid://c8odmyh40ufto"]
+
+[ext_resource type="PackedScene" uid="uid://cgk847bk54co1" path="res://sedan_sports.tscn" id="1_8ijou"]
+
+[sub_resource type="Curve3D" id="Curve3D_2sytt"]
+_data = {
+"points": PackedVector3Array(55.9818, 6.23589, 12.7019, -55.9818, -6.23589, -12.7019, -275.898, 0.00170898, 473.916, 0, 0, 0, 0, 0, 0, -512.186, -0.000610352, -153.935, -49.0437, -1.28546, -17.6, 49.0437, 1.28546, 17.6, -147.627, -0.0012207, -353.092, 7.60703, 0.693835, -28.3859, -7.60703, -0.693835, 28.3859, -0.790864, -0.000732422, -191.066, 22.9868, 1.1964, -32.062, -22.9868, -1.1964, 32.062, -294.463, -0.000366211, -89.7998, -52.49, -37.5515, -45.1918, 52.49, 37.5515, 45.1918, 303.008, 0.000488281, 139.737, 22.9723, -2.50863, -24.1005, -22.9723, 2.50863, 24.1005, 250.687, 0.0012207, 352.397, 0, 0, 0, 0, 0, 0, -275.898, 0.00170898, 473.916),
+"tilts": PackedFloat32Array(0.455152, 0, 0, 0, 0, 0, 0, 0)
+}
+point_count = 8
+
+[sub_resource type="PhysicsMaterial" id="PhysicsMaterial_t60yh"]
+
+[sub_resource type="BoxMesh" id="BoxMesh_ugd4q"]
+size = Vector3(1000, 1, 1000)
+
+[sub_resource type="Skin" id="Skin_gqhhy"]
+
+[sub_resource type="ConvexPolygonShape3D" id="ConvexPolygonShape3D_u601x"]
+points = PackedVector3Array(0.5, 0.5, 0.5, 0.5, 0.5, -0.5, -0.5, 0.5, 0.5, 0.5, -0.5, 0.5, 0.5, -0.5, -0.5, -0.5, 0.5, -0.5, -0.5, -0.5, 0.5, -0.5, -0.5, -0.5)
+
+[node name="Node3D" type="Node3D"]
+
+[node name="sedanSports" parent="." instance=ExtResource("1_8ijou")]
+transform = Transform3D(-0.897336, -0.161871, -0.410592, -0.352566, 0.822532, 0.44625, 0.26549, 0.545197, -0.795158, 190.642, 7.86094, 94.1173)
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 0.024659, 0.999696, 0, -0.999696, 0.024659, 0, 145.479, 0)
+
+[node name="Path3D" type="Path3D" parent="."]
+curve = SubResource("Curve3D_2sytt")
+
+[node name="CSGPolygon3D" type="CSGPolygon3D" parent="Path3D"]
+use_collision = true
+polygon = PackedVector2Array(-5.8723, 2.30984, -6.84343, 0.749664, -6.19085, 0.31829, 10.6591, 0.233867, 11.5788, 0.542963, 11.1478, 1.47145, 12.6339, -0.0339355, -7.79918, 0.0109038)
+mode = 2
+path_node = NodePath("..")
+path_interval_type = 0
+path_interval = 1.0
+path_simplify_angle = 0.0
+path_rotation = 2
+path_local = false
+path_continuous_u = true
+path_u_distance = 1.0
+path_joined = false
+smooth_faces = true
+
+[node name="StaticBody3D" type="StaticBody3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -74.7023, -18.7128, 0)
+physics_material_override = SubResource("PhysicsMaterial_t60yh")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="StaticBody3D"]
+mesh = SubResource("BoxMesh_ugd4q")
+skin = SubResource("Skin_gqhhy")
+skeleton = NodePath("../..")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="StaticBody3D"]
+shape = SubResource("ConvexPolygonShape3D_u601x")

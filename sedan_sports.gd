@@ -5,8 +5,11 @@ const ENGINE_POWER = 140000
 const BRAKE_POWER = 30000
 const REVERSE_SPEED = -50000
 
+var last_speed = 0
+
 @onready var camera_pivot = $CameraPivot
 @onready var camera_3d = $CameraPivot/Camera3D
+@onready var speed_label = $CameraPivot/Camera3D/RichTextLabel
 
 var look_at
 
@@ -34,6 +37,15 @@ func _physics_process(delta):
 	camera_pivot.transform = camera_pivot.transform.interpolate_with(transform, delta * 5.0)
 	look_at = look_at.lerp(global_position + linear_velocity, delta * 5.0)
 	camera_3d.look_at(global_position + linear_velocity)
+	
+	# Calculate speed
+	var speed = linear_velocity.length()
+	var acceleration = (speed - last_speed) / delta
+	
+	# Update speed label text
+	speed_label.text = "Speed: " + str(round(speed)) + " m/s" + "\nAcceleration: " + str(round(acceleration)) + " m/s²"
+	
+	last_speed = speed
 	
 	if Input.is_action_pressed("ui_cancel"):
 		position = Vector3(position.x, position.y + 1, position.z)
