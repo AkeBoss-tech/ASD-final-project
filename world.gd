@@ -17,6 +17,9 @@ var checkpoints = []
 # Number of checkpoints to generate
 var num_checkpoints = 10
 
+# Current checkpoint index
+var current_checkpoint_index = 0
+
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	if not path or not car:
@@ -90,17 +93,23 @@ func generate_checkpoints():
 		checkpoint.global_rotation = rotation_along_path
 		
 		# Connect the area_entered signal
-		checkpoint.connect("body_entered", _on_checkpoint_area_entered)
+		checkpoint.connect("body_entered", func(body): return _on_checkpoint_area_entered(body, checkpoint))
 		
 		# Add checkpoint to array
 		checkpoints.append(checkpoint)
 		
 # Signal handler for checkpoint area entered
-func _on_checkpoint_area_entered(area):
-	if area == car:
-		print("Car entered a checkpoint!")
-		# You can add additional logic here, such as updating progress or validating lap completion
-		
+func _on_checkpoint_area_entered(body, checkpoint):
+	if body == car:
+		if checkpoints[current_checkpoint_index] == checkpoint:
+			print("Car entered checkpoint ", current_checkpoint_index)
+			current_checkpoint_index += 1
+			if current_checkpoint_index >= num_checkpoints:
+				current_checkpoint_index = 0
+				_on_start_body_entered(car)
+		else:
+			print("Checkpoint missed or out of order!")
+
 func _on_start_body_entered(body):
 	if body == car:
 		print("Car crossed the start/finish line!")
