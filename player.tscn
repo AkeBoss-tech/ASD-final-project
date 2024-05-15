@@ -211,7 +211,7 @@ shadow_mesh = SubResource("ArrayMesh_goa5y")
 points = PackedVector3Array(0.6, 0.099996, 0.434479, 0.549961, 0.388529, -0.06565, 0.349922, 0.536016, 1.27989, 0.6, 0, 0.434479, 0.6, 0.099996, -0.165626, 0.549961, 0.388529, -0.165626, 0.349922, 0, 1.27989, 0.349922, 0.536016, 1.27964, 0.0669538, 0.632544, 0.202956, -0.350039, 0.536016, 1.27989, 0.6, 0, -0.165626, 0.449883, 0.149963, -1.27989, 0.0669538, 0.632544, 0.102981, -0.350039, 0, 1.27989, -0.0670713, 0.632544, 0.202956, -0.350039, 0.536016, 1.27964, -0.550078, 0.388529, -0.06565, -0.6, 0.099996, 0.434479, 0.449883, 0, -1.27989, -0.450117, 0.149963, -1.27989, -0.0670713, 0.632544, 0.102981, -0.6, 0, 0.434479, -0.550078, 0.388529, -0.165626, -0.6, 0.099996, -0.165626, -0.450117, 0, -1.27989, -0.6, 0, -0.165626)
 
 [node name="race" type="VehicleBody3D"]
-mass = 300.0
+mass = 350.0
 physics_material_override = SubResource("PhysicsMaterial_x371t")
 gravity_scale = 2.0
 center_of_mass_mode = 1
@@ -226,7 +226,7 @@ wheel_radius = 0.3
 wheel_rest_length = 0.05
 wheel_friction_slip = 1000.0
 suspension_travel = 0.025
-suspension_stiffness = 1000.0
+suspension_stiffness = 400.0
 
 [node name="wheel_frontRight" type="MeshInstance3D" parent="FrontRight"]
 transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 0, 0, 0)
@@ -242,7 +242,7 @@ wheel_radius = 0.3
 wheel_rest_length = 0.05
 wheel_friction_slip = 1000.0
 suspension_travel = 0.025
-suspension_stiffness = 1000.0
+suspension_stiffness = 400.0
 
 [node name="wheel_frontLeft" type="MeshInstance3D" parent="FrontLeft"]
 gi_mode = 0
@@ -257,7 +257,7 @@ wheel_radius = 0.3
 wheel_rest_length = 0.05
 wheel_friction_slip = 1000.0
 suspension_travel = 0.025
-suspension_stiffness = 1000.0
+suspension_stiffness = 400.0
 
 [node name="wheel_backRight" type="MeshInstance3D" parent="BackRight"]
 transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 0, 0, 0)
@@ -273,7 +273,7 @@ wheel_radius = 0.3
 wheel_rest_length = 0.05
 wheel_friction_slip = 1000.0
 suspension_travel = 0.025
-suspension_stiffness = 1000.0
+suspension_stiffness = 400.0
 
 [node name="wheel_backLeft" type="MeshInstance3D" parent="BackLeft"]
 gi_mode = 0

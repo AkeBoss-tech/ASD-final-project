@@ -1,4 +1,4 @@
-[gd_scene load_steps=11 format=3 uid="uid://66ip25b6myac"]
+[gd_scene load_steps=12 format=3 uid="uid://66ip25b6myac"]
 
 [ext_resource type="PackedScene" uid="uid://ijwvc0wfeehw" path="res://track_2.tscn" id="1_dw630"]
 [ext_resource type="Script" path="res://world.gd" id="1_kb0y1"]
@@ -17,16 +17,23 @@ _data = {
 }
 point_count = 103
 
+[sub_resource type="CylinderShape3D" id="CylinderShape3D_05o5k"]
+height = 10.0
+radius = 10.0
+
 [node name="world" type="Node3D"]
 script = ExtResource("1_kb0y1")
 
 [node name="track_2" parent="." instance=ExtResource("1_dw630")]
-transform = Transform3D(8, 0, 0, 0, 0.5, 0, 0, 0, 8, 0, -0.0841339, 0)
+transform = Transform3D(8, 0, 0, 0, 2, 0, 0, 0, 8, 0, -0.0841339, 0)
 
 [node name="race" parent="." instance=ExtResource("2_775sa")]
 transform = Transform3D(0.025863, 0, 0.999666, 0, 1, 0, -0.999666, 0, 0.025863, 0.0662842, 1.05702, 11.7188)
 center_of_mass = Vector3(0, 0, 0)
 script = null
+
+[node name="Path3D" type="Path3D" parent="."]
+curve = SubResource("Curve3D_0te2g")
 
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 57.093, 9.91325, -84.6299)
@@ -66,25 +73,23 @@ script = null
 transform = Transform3D(0.0758141, 0, 0.997122, 0, 1, 0, -0.997122, 0, 0.0758141, 11.295, 0.832799, 9.60537)
 script = null
 
-[node name="Path3D" type="Path3D" parent="."]
-visible = false
-curve = SubResource("Curve3D_0te2g")
-
-[node name="CSGPolygon3D" type="CSGPolygon3D" parent="Path3D"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.014487, 0.418915, 0.405212)
-visible = false
-polygon = PackedVector2Array(-2.88484, 1.38049, 5.95775, 1.4216, 7.53847, -0.220142, -3.72371, -0.264657)
-mode = 2
-path_node = NodePath("..")
-path_interval_type = 1
-path_interval = 1.0
-path_simplify_angle = 0.0
-path_rotation = 2
-path_local = false
-path_continuous_u = true
-path_u_distance = 0.62
-path_joined = false
-smooth_faces = true
-
 [node name="race2" parent="." instance=ExtResource("2_775sa")]
 transform = Transform3D(-0.0389982, 0, 0.999239, 0, 1, 0, -0.999239, 0, -0.0389982, -13.8157, 2.07998, 13.0017)
+
+[node name="start" type="Area3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 10.1837, 15.2142)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="start"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -7.12725, -5.30835, -2.22945)
+shape = SubResource("CylinderShape3D_05o5k")
+
+[node name="HUD" type="CanvasLayer" parent="."]
+
+[node name="time" type="Label" parent="HUD"]
+offset_left = 818.0
+offset_top = 11.0
+offset_right = 1047.0
+offset_bottom = 99.0
+text = "Time: "
+
+[connection signal="body_entered" from="start" to="." method="_on_start_body_entered"]
