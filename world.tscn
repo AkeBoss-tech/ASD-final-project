@@ -92,4 +92,11 @@ offset_right = 1047.0
 offset_bottom = 99.0
 text = "Time: "
 
+[node name="speed" type="Label" parent="HUD"]
+offset_left = 31.0
+offset_top = 19.0
+offset_right = 294.0
+offset_bottom = 120.0
+text = "Speed: "
+
 [connection signal="body_entered" from="start" to="." method="_on_start_body_entered"]

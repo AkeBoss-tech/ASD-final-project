@@ -1,9 +1,9 @@
 extends VehicleBody3D
 
 @export var max_steer = 0.7
-const ENGINE_POWER = 100000
-const BRAKE_POWER = 30000
-const REVERSE_SPEED = -35000
+const ENGINE_POWER = 150_000
+const BRAKE_POWER = 30_000
+const REVERSE_SPEED = -35_000
 
 signal speed_changed(speed)
 
@@ -18,7 +18,7 @@ func _ready():
 	look_at = global_position
 
 func _check_camera_switch():
-	if linear_velocity.dot(transform.basis.z) < 0.01:
+	if linear_velocity.dot(transform.basis.z) > -0.01:
 		camera_3d.current = true
 	else:
 		reverse_camera.current = true

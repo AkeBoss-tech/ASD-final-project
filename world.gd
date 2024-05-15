@@ -25,9 +25,12 @@ func _ready():
 	if not path or not car:
 		print("Warning: Missing path or car node reference!")
 	path_global_transform = path.global_transform
+	car.connect("speed_changed", _on_car_speed_changed)
 	
 	generate_checkpoints()
 
+func _on_car_speed_changed(speed):
+	$HUD/speed.text = "Speed: " + str(round(speed)) + " units/sec"
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
@@ -41,9 +44,16 @@ func _process(delta):
 	
 	# Calculate car progress percentage
 	var progress_percent = get_car_progress_percent(car_position_local) * 100
+	
+	# Check for the escape key press
+	if Input.is_action_pressed("ui_cancel"):
+		car.global_transform.origin = checkpoints[current_checkpoint_index - 1].global_transform.origin
+		car.global_transform.basis = checkpoints[current_checkpoint_index - 1].global_transform.basis
+		car.linear_velocity = Vector3.ZERO
+		car.angular_velocity = Vector3.ZERO
 		
 	time += delta
-	$HUD/time.text = "TIME: " + str(time).pad_zeros(3).left(6) + " PROGRESS: " + str(progress_percent)
+	$HUD/time.text = "TIME: " + str(time).pad_zeros(3).left(6) + " PROGRESS: " + str(round(progress_percent)) + "%"
 
 
 func get_car_progress_percent(target_position_local):
@@ -68,13 +78,25 @@ func get_car_progress_percent(target_position_local):
 
 # Generate checkpoints along the Path3D
 func generate_checkpoints():
+	var EPSILON = 10
+	
 	var path_length = path.curve.get_baked_length()
 	var segment_length = path_length / num_checkpoints
 	
 	for i in range(num_checkpoints):
 		var distance_along_path = segment_length * i
 		var position_along_path = path.curve.sample_baked(distance_along_path)
-		var rotation_along_path = path.curve.sample_baked_up_vector(distance_along_path, true)
+		# Sample a point slightly ahead for tangent calculation
+		var slightly_ahead_distance = distance_along_path + EPSILON  # Small epsilon value
+
+		# Ensure we don't go beyond path length
+		if slightly_ahead_distance > path.curve.get_baked_length():
+			slightly_ahead_distance = path.curve.get_baked_length()
+
+		var slightly_ahead_point = path.curve.sample_baked(slightly_ahead_distance)
+
+		# Calculate the tangent vector (direction)
+		var tangent = (slightly_ahead_point - position_along_path).normalized()
 		
 		var checkpoint = Area3D.new()
 		var collision_shape = CollisionShape3D.new()
@@ -90,7 +112,7 @@ func generate_checkpoints():
 		
 		# Set the position of the checkpoint
 		checkpoint.global_position = position_along_path
-		checkpoint.global_rotation = rotation_along_path
+		checkpoint.look_at(position_along_path + tangent, Vector3.UP)
 		
 		# Connect the area_entered signal
 		checkpoint.connect("body_entered", func(body): return _on_checkpoint_area_entered(body, checkpoint))
