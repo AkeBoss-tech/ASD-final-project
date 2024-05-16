@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" path="res://nissangtr.gd" id="1_6tfp3"]
 
-[sub_resource type="PhysicsMaterial" id="PhysicsMaterial_8un16"]
+[sub_resource type="PhysicsMaterial" id="PhysicsMaterial_4y6ak"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_3pcry"]
 resource_name = "chasis"
@@ -466,9 +466,9 @@ blend_shape_mode = 0
 shadow_mesh = SubResource("ArrayMesh_ck0ii")
 
 [node name="NISSANGTR" type="VehicleBody3D"]
-mass = 350.0
-physics_material_override = SubResource("PhysicsMaterial_8un16")
-gravity_scale = 2.0
+mass = 20.0
+physics_material_override = SubResource("PhysicsMaterial_4y6ak")
+gravity_scale = 3.0
 center_of_mass_mode = 1
 center_of_mass = Vector3(0, 0, 0.2)
 script = ExtResource("1_6tfp3")
@@ -484,7 +484,7 @@ shape = SubResource("ConvexPolygonShape3D_mhcmc")
 top_level = true
 
 [node name="Camera3D" type="Camera3D" parent="CameraPivot"]
-transform = Transform3D(-1, 1.87728e-08, -8.53834e-08, 0, 0.976672, 0.214735, 8.74228e-08, 0.214735, -0.976672, 0, 1.5, -5.39356)
+transform = Transform3D(-1, 1.87728e-08, -8.53834e-08, 0, 0.976672, 0.214735, 8.74228e-08, 0.214735, -0.976672, 0, 1.5, -5)
 current = true
 fov = 67.5
 
@@ -494,8 +494,11 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.6, -0.5)
 [node name="Back_Left" type="VehicleWheel3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.01982, -0.362112, -1.64485)
 use_as_traction = true
-wheel_friction_slip = 20.0
-suspension_stiffness = 200.0
+wheel_roll_influence = 0.01
+wheel_rest_length = 0.2
+wheel_friction_slip = 1.1
+suspension_travel = 0.1
+suspension_stiffness = 120.0
 
 [node name="Circle_003" type="MeshInstance3D" parent="Back_Left"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.19209e-07, 0, 0)
@@ -505,7 +508,10 @@ skeleton = NodePath("")
 [node name="Front_Right" type="VehicleWheel3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.01802, -0.374216, 1.94393)
 use_as_steering = true
-wheel_friction_slip = 20.0
+wheel_roll_influence = 0.01
+wheel_rest_length = 0.2
+wheel_friction_slip = 1.4
+suspension_travel = 0.1
 suspension_stiffness = 200.0
 
 [node name="Circle_001" type="MeshInstance3D" parent="Front_Right"]
@@ -515,8 +521,11 @@ skeleton = NodePath("")
 [node name="Back_Right" type="VehicleWheel3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.01804, -0.362213, -1.64487)
 use_as_traction = true
-wheel_friction_slip = 20.0
-suspension_stiffness = 200.0
+wheel_roll_influence = 0.01
+wheel_rest_length = 0.2
+wheel_friction_slip = 1.1
+suspension_travel = 0.1
+suspension_stiffness = 120.0
 
 [node name="Circle_002" type="MeshInstance3D" parent="Back_Right"]
 mesh = SubResource("ArrayMesh_4l4jl")
@@ -525,7 +534,10 @@ skeleton = NodePath("")
 [node name="Front_Left" type="VehicleWheel3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.00646, -0.374187, 1.94384)
 use_as_steering = true
-wheel_friction_slip = 20.0
+wheel_roll_influence = 0.01
+wheel_rest_length = 0.2
+wheel_friction_slip = 1.4
+suspension_travel = 0.1
 suspension_stiffness = 200.0
 
 [node name="Circle" type="MeshInstance3D" parent="Front_Left"]

@@ -1,11 +1,12 @@
-[gd_scene load_steps=12 format=3 uid="uid://66ip25b6myac"]
+[gd_scene load_steps=13 format=3 uid="uid://66ip25b6myac"]
 
 [ext_resource type="PackedScene" uid="uid://ijwvc0wfeehw" path="res://track_2.tscn" id="1_dw630"]
 [ext_resource type="Script" path="res://world.gd" id="1_kb0y1"]
 [ext_resource type="PackedScene" uid="uid://cx4oc67e351vo" path="res://player.tscn" id="2_775sa"]
 [ext_resource type="PackedScene" uid="uid://gyliv8ufctt7" path="res://sedan.tscn" id="4_2nlaj"]
-[ext_resource type="Script" path="res://sedan.gd" id="5_g7dk3"]
+[ext_resource type="Script" path="res://path_follower.gd" id="4_u6nsj"]
 [ext_resource type="PackedScene" uid="uid://cgk847bk54co1" path="res://sedan_sports.tscn" id="5_me6ty"]
+[ext_resource type="Script" path="res://sedan_follow_path.gd" id="6_e6ugb"]
 [ext_resource type="PackedScene" uid="uid://cqgcwl8m0soko" path="res://suv.tscn" id="6_meuha"]
 [ext_resource type="PackedScene" uid="uid://dxl6tnexpnd3f" path="res://police.tscn" id="7_074fx"]
 [ext_resource type="PackedScene" uid="uid://rnh8ygv4e888" path="res://race_future.tscn" id="8_wf0rq"]
@@ -35,6 +36,14 @@ script = null
 [node name="Path3D" type="Path3D" parent="."]
 curve = SubResource("Curve3D_0te2g")
 
+[node name="PathFollow3D" type="PathFollow3D" parent="Path3D"]
+transform = Transform3D(0.0081415, 0, 0.999967, 0, 1, 0, -0.999967, 0, 0.0081415, -15.3715, 0, 11.9631)
+script = ExtResource("4_u6nsj")
+
+[node name="sedan" parent="Path3D/PathFollow3D" instance=ExtResource("4_2nlaj")]
+transform = Transform3D(0.99988, 0, 0.0154539, 0, 1, 0, -0.0154539, 0, 0.99988, 1.80729, 1.11872, 15.3573)
+script = ExtResource("6_e6ugb")
+
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 57.093, 9.91325, -84.6299)
 visible = false
@@ -53,10 +62,6 @@ transform = Transform3D(1, 0, 0, 0, 0.290635, 0.956834, 0, -0.956834, 0.290635, 
 [node name="DirectionalLight3D3" type="DirectionalLight3D" parent="DirectionalLight3D3"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -26.6392, 7.57815, 11.1715)
 
-[node name="sedan" parent="." instance=ExtResource("4_2nlaj")]
-transform = Transform3D(-0.00731287, 0, 0.999973, 0, 1, 0, -0.999973, 0, -0.00731287, 0, 1.11872, 10.2809)
-script = ExtResource("5_g7dk3")
-
 [node name="suv" parent="." instance=ExtResource("6_meuha")]
 transform = Transform3D(0.149311, 0, 0.98879, 0, 1, 0, -0.98879, 0, 0.149311, 5.30852, 1.15886, 11.8414)
 script = null
@@ -74,7 +79,7 @@ transform = Transform3D(0.0758141, 0, 0.997122, 0, 1, 0, -0.997122, 0, 0.0758141
 script = null
 
 [node name="race2" parent="." instance=ExtResource("2_775sa")]
-transform = Transform3D(-0.0389982, 0, 0.999239, 0, 1, 0, -0.999239, 0, -0.0389982, -13.8157, 2.07998, 13.0017)
+transform = Transform3D(-0.0389982, 0, 0.999239, 0, 1, 0, -0.999239, 0, -0.0389982, -3.00297, 2.07998, 13.0017)
 
 [node name="start" type="Area3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 10.1837, 15.2142)

@@ -32,7 +32,7 @@ curve = SubResource("Curve3D_2sytt")
 
 [node name="CSGPolygon3D" type="CSGPolygon3D" parent="Path3D"]
 use_collision = true
-polygon = PackedVector2Array(-5.8723, 2.30984, -6.84343, 0.749664, -6.19085, 0.31829, 10.6591, 0.233867, 11.5788, 0.542963, 11.1478, 1.47145, 12.6339, -0.0339355, -7.79918, 0.0109038)
+polygon = PackedVector2Array(-8.18556, 2.43947, -6.84343, 0.749664, -6.19085, 0.31829, 10.6591, 0.233867, 11.5788, 0.542963, 13.0239, 2.07764, 12.6339, -0.0339355, -7.79918, 0.0109038)
 mode = 2
 path_node = NodePath("..")
 path_interval_type = 0

@@ -83,7 +83,7 @@ func generate_checkpoints():
 	var path_length = path.curve.get_baked_length()
 	var segment_length = path_length / num_checkpoints
 	
-	for i in range(num_checkpoints):
+	for i in range(num_checkpoints + 1):
 		var distance_along_path = segment_length * i
 		var position_along_path = path.curve.sample_baked(distance_along_path)
 		# Sample a point slightly ahead for tangent calculation
@@ -94,9 +94,6 @@ func generate_checkpoints():
 			slightly_ahead_distance = path.curve.get_baked_length()
 
 		var slightly_ahead_point = path.curve.sample_baked(slightly_ahead_distance)
-
-		# Calculate the tangent vector (direction)
-		var tangent = (slightly_ahead_point - position_along_path).normalized()
 		
 		var checkpoint = Area3D.new()
 		var collision_shape = CollisionShape3D.new()
@@ -112,7 +109,7 @@ func generate_checkpoints():
 		
 		# Set the position of the checkpoint
 		checkpoint.global_position = position_along_path
-		checkpoint.look_at(position_along_path + tangent, Vector3.UP)
+		checkpoint.look_at(slightly_ahead_point, Vector3.UP)
 		
 		# Connect the area_entered signal
 		checkpoint.connect("body_entered", func(body): return _on_checkpoint_area_entered(body, checkpoint))
@@ -126,7 +123,7 @@ func _on_checkpoint_area_entered(body, checkpoint):
 		if checkpoints[current_checkpoint_index] == checkpoint:
 			print("Car entered checkpoint ", current_checkpoint_index)
 			current_checkpoint_index += 1
-			if current_checkpoint_index >= num_checkpoints:
+			if current_checkpoint_index >= num_checkpoints + 1:
 				current_checkpoint_index = 0
 				_on_start_body_entered(car)
 		else:
