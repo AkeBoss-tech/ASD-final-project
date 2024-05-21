@@ -1,15 +1,14 @@
 [gd_scene load_steps=13 format=3 uid="uid://66ip25b6myac"]
 
 [ext_resource type="PackedScene" uid="uid://ijwvc0wfeehw" path="res://track_2.tscn" id="1_dw630"]
-[ext_resource type="Script" path="res://world.gd" id="1_kb0y1"]
+[ext_resource type="Script" path="res://car_npcs.gd" id="1_w8wk3"]
 [ext_resource type="PackedScene" uid="uid://cx4oc67e351vo" path="res://player.tscn" id="2_775sa"]
 [ext_resource type="PackedScene" uid="uid://gyliv8ufctt7" path="res://sedan.tscn" id="4_2nlaj"]
-[ext_resource type="Script" path="res://path_follower.gd" id="4_u6nsj"]
 [ext_resource type="PackedScene" uid="uid://cgk847bk54co1" path="res://sedan_sports.tscn" id="5_me6ty"]
-[ext_resource type="Script" path="res://sedan_follow_path.gd" id="6_e6ugb"]
 [ext_resource type="PackedScene" uid="uid://cqgcwl8m0soko" path="res://suv.tscn" id="6_meuha"]
 [ext_resource type="PackedScene" uid="uid://dxl6tnexpnd3f" path="res://police.tscn" id="7_074fx"]
 [ext_resource type="PackedScene" uid="uid://rnh8ygv4e888" path="res://race_future.tscn" id="8_wf0rq"]
+[ext_resource type="Script" path="res://camera_ionly.gd" id="9_jjhmm"]
 
 [sub_resource type="Curve3D" id="Curve3D_0te2g"]
 _data = {
@@ -22,8 +21,13 @@ point_count = 103
 height = 10.0
 radius = 10.0
 
+[sub_resource type="CapsuleMesh" id="CapsuleMesh_87mdl"]
+
 [node name="world" type="Node3D"]
-script = ExtResource("1_kb0y1")
+script = ExtResource("1_w8wk3")
+max_speed = 1000.0
+some_angle_threshold = 0.1
+path_speed = 200
 
 [node name="track_2" parent="." instance=ExtResource("1_dw630")]
 transform = Transform3D(8, 0, 0, 0, 2, 0, 0, 0, 8, 0, -0.0841339, 0)
@@ -38,11 +42,6 @@ curve = SubResource("Curve3D_0te2g")
 
 [node name="PathFollow3D" type="PathFollow3D" parent="Path3D"]
 transform = Transform3D(0.0081415, 0, 0.999967, 0, 1, 0, -0.999967, 0, 0.0081415, -15.3715, 0, 11.9631)
-script = ExtResource("4_u6nsj")
-
-[node name="sedan" parent="Path3D/PathFollow3D" instance=ExtResource("4_2nlaj")]
-transform = Transform3D(0.99988, 0, 0.0154539, 0, 1, 0, -0.0154539, 0, 0.99988, 1.80729, 1.11872, 15.3573)
-script = ExtResource("6_e6ugb")
 
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 57.093, 9.91325, -84.6299)
@@ -80,6 +79,7 @@ script = null
 
 [node name="race2" parent="." instance=ExtResource("2_775sa")]
 transform = Transform3D(-0.0389982, 0, 0.999239, 0, 1, 0, -0.999239, 0, -0.0389982, -3.00297, 2.07998, 13.0017)
+script = null
 
 [node name="start" type="Area3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 10.1837, 15.2142)
@@ -103,5 +103,15 @@ offset_top = 19.0
 offset_right = 294.0
 offset_bottom = 120.0
 text = "Speed: "
+
+[node name="Timer" type="Timer" parent="."]
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -12.9894, 5.2295, 11.8164)
+mesh = SubResource("CapsuleMesh_87mdl")
+
+[node name="sedan" parent="." instance=ExtResource("4_2nlaj")]
+transform = Transform3D(-0.00731287, 0, 0.999973, 0, 1, 0, -0.999973, 0, -0.00731287, -22.5417, 1.11872, 10.2809)
+script = ExtResource("9_jjhmm")
 
 [connection signal="body_entered" from="start" to="." method="_on_start_body_entered"]
