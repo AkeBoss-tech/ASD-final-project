@@ -25,9 +25,7 @@ radius = 10.0
 
 [node name="world" type="Node3D"]
 script = ExtResource("1_w8wk3")
-max_speed = 1000.0
-some_angle_threshold = 0.1
-path_speed = 200
+max_speed = 1500.0
 
 [node name="track_2" parent="." instance=ExtResource("1_dw630")]
 transform = Transform3D(8, 0, 0, 0, 2, 0, 0, 0, 8, 0, -0.0841339, 0)
