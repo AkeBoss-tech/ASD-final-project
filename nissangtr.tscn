@@ -484,7 +484,7 @@ shape = SubResource("ConvexPolygonShape3D_mhcmc")
 top_level = true
 
 [node name="Camera3D" type="Camera3D" parent="CameraPivot"]
-transform = Transform3D(-1, 1.87728e-08, -8.53834e-08, 0, 0.976672, 0.214735, 8.74228e-08, 0.214735, -0.976672, 0, 1.5, -5)
+transform = Transform3D(-1, 1.87727e-08, -8.53834e-08, 0, 0.976672, 0.214735, 8.74228e-08, 0.214735, -0.976672, 0, 1.5, -6.24583)
 current = true
 fov = 67.5
 

@@ -21,7 +21,7 @@ var timer
 
 func _ready():
 	# Initialize nodes
-	path = $Path3D
+	path = $RacingLine
 	path_follow = path.get_node("PathFollow3D")
 	vehicle = $sedan
 	target_marker_mesh = $MeshInstance3D
