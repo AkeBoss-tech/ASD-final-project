@@ -1,157 +1,121 @@
-[gd_scene load_steps=14 format=3 uid="uid://66ip25b6myac"]
+[gd_scene load_steps=7 format=3 uid="uid://o8qqsuune3hm"]
 
-[ext_resource type="PackedScene" uid="uid://ijwvc0wfeehw" path="res://track_2.tscn" id="1_dw630"]
-[ext_resource type="Script" path="res://world.gd" id="1_ruuo8"]
-[ext_resource type="PackedScene" uid="uid://cx4oc67e351vo" path="res://player.tscn" id="2_775sa"]
-[ext_resource type="PackedScene" uid="uid://gyliv8ufctt7" path="res://sedan.tscn" id="4_2nlaj"]
-[ext_resource type="PackedScene" uid="uid://cgk847bk54co1" path="res://sedan_sports.tscn" id="5_me6ty"]
-[ext_resource type="PackedScene" uid="uid://cqgcwl8m0soko" path="res://suv.tscn" id="6_meuha"]
-[ext_resource type="PackedScene" uid="uid://dxl6tnexpnd3f" path="res://police.tscn" id="7_074fx"]
-[ext_resource type="PackedScene" uid="uid://rnh8ygv4e888" path="res://race_future.tscn" id="8_wf0rq"]
-[ext_resource type="Script" path="res://ai_driver.gd" id="9_q5uqk"]
+[ext_resource type="PackedScene" uid="uid://cx4oc67e351vo" path="res://player.tscn" id="1_qe5y8"]
+[ext_resource type="PackedScene" uid="uid://ijwvc0wfeehw" path="res://track_2.tscn" id="1_yipq5"]
+[ext_resource type="Script" path="res://player_2.gd" id="2_f6x5e"]
 
-[sub_resource type="Curve3D" id="Curve3D_sy0r4"]
+[sub_resource type="Curve3D" id="Curve3D_7m6t0"]
 _data = {
 "points": PackedVector3Array(0, 0, 0, 0, 0, 0, -23.7337, 0, 16.635, 0, 0, 0, 0, 0, 0, -39.6585, 0, 16.8632, 0, 0, 0, 0, 0, 0, -51.0863, 0, 16.79, 0, 0, 0, 0, 0, 0, -66.4817, 0, 17.4986, 0, 0, 0, 0, 0, 0, -76.1795, 0, 17.4138, 0, 0, 0, 0, 0, 0, -102.214, 0, 18.6954, 0, 0, 0, 0, 0, 0, -129.525, 0, 18.6953, 0, 0, 0, 0, 0, 0, -141.275, 0, 18.6953, 0, 0, 0, 0, 0, 0, -151.339, 0, 17.6009, 0, 0, 0, 0, 0, 0, -160.057, 0, 12.0943, 0, 0, 0, 0, 0, 0, -165.564, 0, 4.75222, 0, 0, 0, 0, 0, 0, -167.745, 0, -2.51621, 0, 0, 0, 0, 0, 0, -169.694, 0, -9.01419, 0, 0, 0, 0, 0, 0, -168.776, 0, -20.4862, 0, 0, 0, 0, 0, 0, -161.893, 0, -29.6638, 0, 0, 0, 0, 0, 0, -148.585, 0, -37.9236, 0, 0, 0, 0, 0, 0, -126.559, 0, -42.9713, 0, 0, 0, 0, 0, 0, -109.122, 0, -42.5124, 0, 0, 0, 0, 0, 0, -86.1775, 0, -38.3825, 0, 0, 0, 0, 0, 0, -72.87, 0, -34.2526, 0, 0, 0, 0, 0, 0, -58.1858, 0, -32.876, 0, 0, 0, 0, 0, 0, -46.2549, 0, -32.876, 0, 0, 0, 0, 0, 0, -35.8431, 0, -36.561, 0, 0, 0, 0, 0, 0, -29.2763, 0, -43.8891, 0, 0, 0, 0, 0, 0, -24.2287, 0, -54.9022, 0, 0, 0, 0, 0, 0, -25.6053, 0, -70.0452, 0, 0, 0, 0, 0, 0, -33.8651, 0, -79.6817, 0, 0, 0, 0, 0, 0, -50.3848, 0, -84.7294, 0, 0, 0, 0, 0, 0, -71.4933, 0, -88.8594, 0, 0, 0, 0, 0, 0, -93.0607, 0, -89.7771, 0, 0, 0, 0, 0, 0, -117.84, 0, -86.1061, 0, 0, 0, 0, 0, 0, -134.819, 0, -79.6817, 0, 0, 0, 0, 0, 0, -148.126, 0, -79.6817, 0, 0, 0, 0, 0, 0, -156.845, 0, -83.3528, 0, 0, 0, 0, 0, 0, -165.564, 0, -89.7771, 0, 0, 0, 0, 0, 0, -171.988, 0, -103.544, 0, 0, 0, 0, 0, 0, -177.954, 0, -119.145, 0, 0, 0, 0, 0, 0, -182.542, 0, -134.288, 0, 0, 0, 0, 0, 0, -183.46, 0, -147.596, 0, 0, 0, 0, 0, 0, -180.248, 0, -161.362, 0, 0, 0, 0, 0, 0, -175.2, 0, -173.752, 0, 0, 0, 0, 0, 0, -167.858, 0, -181.094, 0, 0, 0, 0, 0, 0, -156.845, 0, -184.306, 0, 0, 0, 0, 0, 0, -145.832, 0, -182.012, 0, 0, 0, 0, 0, 0, -137.572, 0, -176.047, 0, 0, 0, 0, 0, 0, -132.066, 0, -168.704, 0, 0, 0, 0, 0, 0, -129.312, 0, -156.315, 0, 0, 0, 0, 0, 0, -127.936, 0, -144.843, 0, 0, 0, 0, 0, 0, -126.559, 0, -135.206, 0, 0, 0, 0, 0, 0, -119.676, 0, -126.029, 0, 0, 0, 0, 0, 0, -110.039, 0, -118.228, 0, 0, 0, 0, 0, 0, -91.6841, 0, -112.262, 0, 0, 0, 0, 0, 0, -74.2466, 0, -112.262, 0, 0, 0, 0, 0, 0, -59.5625, 0, -116.851, 0, 0, 0, 0, 0, 0, -46.7138, 0, -126.488, 0, 0, 0, 0, 0, 0, -40.7483, 0, -138.877, 0, 0, 0, 0, 0, 0, -43.0427, 0, -149.432, 0, 0, 0, 0, 0, 0, -52.2204, 0, -155.856, 0, 0, 0, 0, 0, 0, -59.1036, 0, -165.492, 0, 0, 0, 0, 0, 0, -59.5625, 0, -176.505, 0, 0, 0, 0, 0, 0, -56.3503, 0, -183.389, 0, 0, 0, 0, 0, 0, -47.6316, 0, -187.519, 0, 0, 0, 0, 0, 0, -32.4885, 0, -193.484, 0, 0, 0, 0, 0, 0, -16.8866, 0, -194.402, 0, 0, 0, 0, 0, 0, -3.12017, 0, -192.566, 0, 0, 0, 0, 0, 0, 6.9752, 0, -187.519, 0, 0, 0, 0, 0, 0, 13.8584, 0, -181.094, 0, 0, 0, 0, 0, 0, 20.2827, 0, -171.917, 0, 0, 0, 0, 0, 0, 26.707, 0, -159.068, 0, 0, 0, 0, 0, 0, 30.837, 0, -143.925, 0, 0, 0, 0, 0, 0, 34.9669, 0, -124.652, 0, 0, 0, 0, 0, 0, 35.8846, 0, -97.1192, 0, 0, 0, 0, 0, 0, 32.6725, 0, -78.764, 0, 0, 0, 0, 0, 0, 26.707, 0, -63.162, 0, 0, 0, 0, 0, 0, 25.7893, 0, -47.1012, 0, 0, 0, 0, 0, 0, 32.6725, 0, -31.9582, 0, 0, 0, 0, 0, 0, 39.0968, 0, -21.8628, 0, 0, 0, 0, 0, 0, 46.4389, 0, -17.7329, 0, 0, 0, 0, 0, 0, 55.6165, 0, -18.1918, 0, 0, 0, 0, 0, 0, 62.9586, 0, -24.1572, 0, 0, 0, 0, 0, 0, 67.5474, 0, -31.9582, 0, 0, 0, 0, 0, 0, 73.0539, 0, -48.019, 0, 0, 0, 0, 0, 0, 79.0194, 0, -64.5387, 0, 0, 0, 0, 0, 0, 82.6904, 0, -85.6472, 0, 0, 0, 0, 0, 0, 83.6082, 0, -106.297, 0, 0, 0, 0, 0, 0, 78.1016, 0, -131.994, 0, 0, 0, 0, 0, 0, 76.725, 0, -153.103, 0, 0, 0, 0, 0, 0, 81.7727, 0, -163.657, 0, 0, 0, 0, 0, 0, 87.2792, 0, -170.999, 0, 0, 0, 0, 0, 0, 95.5391, 0, -176.964, 0, 0, 0, 0, 0, 0, 108.847, 0, -181.553, 0, 0, 0, 0, 0, 0, 118.942, 0, -180.635, 0, 0, 0, 0, 0, 0, 127.202, 0, -173.752, 0, 0, 0, 0, 0, 0, 133.626, 0, -161.821, 0, 0, 0, 0, 0, 0, 141.427, 0, -144.384, 0, 0, 0, 0, 0, 0, 146.934, 0, -118.687, 0, 0, 0, 0, 0, 0, 147.851, 0, -89.3182, 0, 0, 0, 0, 0, 0, 147.393, 0, -65.9153, 0, 0, 0, 0, 0, 0, 146.475, 0, -33.3348, 0, 0, 0, 0, 0, 0, 142.804, 0, -18.6507, 0, 0, 0, 0, 0, 0, 140.05, 0, -10.8497, 0, 0, 0, 0, 0, 0, 134.544, 0, 0.16341, 0, 0, 0, 0, 0, 0, 123.99, 0, 7.5055, 0, 0, 0, 0, 0, 0, 106.552, 0, 14.8476, 0, 0, 0, 0, 0, 0, 85.4668, 0, 17.4251, 0, 0, 0, 0, 0, 0, 65.4546, 0, 17.817, 0, 0, 0, 0, 0, 0, 50.1099, 0, 17.6009, 0, 0, 0, 0, 0, 0, 32.7509, 0, 17.6009, 0, 0, 0, 0, 0, 0, 20.2827, 0, 17.6009),
 "tilts": PackedFloat32Array(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0)
 }
 point_count = 109
 
-[sub_resource type="Curve3D" id="Curve3D_0te2g"]
+[sub_resource type="Curve3D" id="Curve3D_7rq0u"]
 _data = {
 "points": PackedVector3Array(0, 0, 0, 0, 0, 0, -89.7989, 0, 11.0216, 0, 0, 0, 0, 0, 0, -108.366, 0, 11.4534, 0, 0, 0, 0, 0, 0, -125.141, 0, 11.7557, 0, 0, 0, 0, 0, 0, -156.717, 0, 11.7523, 0, 0, 0, 0, 0, 0, -170.887, 0, 6.47347, 0, 0, 0, 0, 0, 0, -178.249, 0, -6.58473, 0, 0, 0, 0, 0, 0, -175.471, 0, -22.838, 0, 0, 0, 0, 0, 0, -165.608, 0, -33.1179, 0, 0, 0, 0, 0, 0, -154.457, 0, -36.1945, 0, 0, 0, 0, 0, 0, -139.454, 0, -36.4723, 0, 0, 0, 0, 0, 0, -122.089, 0, -36.6112, 0, 0, 0, 0, 0, 0, -98.8901, 0, -36.6112, 0, 0, 0, 0, 0, 0, -80.4141, 0, -36.1945, 0, 0, 0, 0, 0, 0, -57.9095, 0, -36.1945, 0, 0, 0, 0, 0, 0, -39.2946, 0, -37.028, 0, 0, 0, 0, 0, 0, -25.4029, 0, -43.5571, 0, 0, 0, 0, 0, 0, -18.1386, 0, -56.9681, 0, 0, 0, 0, 0, 0, -22.3061, 0, -73.0825, 0, 0, 0, 0, 0, 0, -38.1426, 0, -83.918, 0, 0, 0, 0, 0, 0, -63.9812, 0, -84.4737, 0, 0, 0, 0, 0, 0, -86.3469, 0, -84.3348, 0, 0, 0, 0, 0, 0, -106.629, 0, -83.918, 0, 0, 0, 0, 0, 0, -126.494, 0, -84.1959, 0, 0, 0, 0, 0, 0, -144.831, 0, -84.4737, 0, 0, 0, 0, 0, 0, -162.929, 0, -84.8712, 0, 0, 0, 0, 0, 0, -173.626, 0, -91.9559, 0, 0, 0, 0, 0, 0, -178.071, 0, -100.708, 0, 0, 0, 0, 0, 0, -178.349, 0, -114.738, 0, 0, 0, 0, 0, 0, -177.932, 0, -127.102, 0, 0, 0, 0, 0, 0, -178.071, 0, -143.911, 0, 0, 0, 0, 0, 0, -178.415, 0, -158.182, 0, 0, 0, 0, 0, 0, -178.137, 0, -172.213, 0, 0, 0, 0, 0, 0, -171.886, 0, -180.964, 0, 0, 0, 0, 0, 0, -159.661, 0, -187.494, 0, 0, 0, 0, 0, 0, -134.101, 0, -181.242, 0, 0, 0, 0, 0, 0, -130.489, 0, -171.101, 0, 0, 0, 0, 0, 0, -131.322, 0, -148.736, 0, 0, 0, 0, 0, 0, -130.767, 0, -128.732, 0, 0, 0, 0, 0, 0, -123.814, 0, -118.71, 0, 0, 0, 0, 0, 0, -113.395, 0, -115.792, 0, 0, 0, 0, 0, 0, -98.5306, 0, -115.653, 0, 0, 0, 0, 0, 0, -79.6379, 0, -115.931, 0, 0, 0, 0, 0, 0, -63.9403, 0, -115.931, 0, 0, 0, 0, 0, 0, -54.2161, 0, -116.487, 0, 0, 0, 0, 0, 0, -44.0751, 0, -121.627, 0, 0, 0, 0, 0, 0, -36.5736, 0, -132.046, 0, 0, 0, 0, 0, 0, -34.4899, 0, -141.631, 0, 0, 0, 0, 0, 0, -36.8514, 0, -149.41, 0, 0, 0, 0, 0, 0, -42.9638, 0, -154.272, 0, 0, 0, 0, 0, 0, -54.355, 0, -157.467, 0, 0, 0, 0, 0, 0, -64.2181, 0, -163.58, 0, 0, 0, 0, 0, 0, -65.7462, 0, -173.721, 0, 0, 0, 0, 0, 0, -63.4945, 0, -183.208, 0, 0, 0, 0, 0, 0, -55.8541, 0, -186.681, 0, 0, 0, 0, 0, 0, -45.0185, 0, -187.932, 0, 0, 0, 0, 0, 0, -35.2943, 0, -188.209, 0, 0, 0, 0, 0, 0, -25.1534, 0, -188.626, 0, 0, 0, 0, 0, 0, -11.2617, 0, -188.487, 0, 0, 0, 0, 0, 0, 4.8527, 0, -188.209, 0, 0, 0, 0, 0, 0, 15.6882, 0, -185.431, 0, 0, 0, 0, 0, 0, 23.1897, 0, -180.43, 0, 0, 0, 0, 0, 0, 28.8853, 0, -170.845, 0, 0, 0, 0, 0, 0, 28.7464, 0, -156.397, 0, 0, 0, 0, 0, 0, 28.8853, 0, -130.976, 0, 0, 0, 0, 0, 0, 28.3297, 0, -112.083, 0, 0, 0, 0, 0, 0, 29.1806, 0, -87.4437, 0, 0, 0, 0, 0, 0, 28.6249, 0, -66.1894, 0, 0, 0, 0, 0, 0, 28.8938, 0, -39.6458, 0, 0, 0, 0, 0, 0, 36.1175, 0, -23.2536, 0, 0, 0, 0, 0, 0, 41.8131, 0, -20.0585, 0, 0, 0, 0, 0, 0, 55.8437, 0, -20.3364, 0, 0, 0, 0, 0, 0, 66.5403, 0, -21.1699, 0, 0, 0, 0, 0, 0, 73.4862, 0, -27.0044, 0, 0, 0, 0, 0, 0, 76.6813, 0, -33.5335, 0, 0, 0, 0, 0, 0, 77.3759, 0, -51.1759, 0, 0, 0, 0, 0, 0, 76.9591, 0, -72.847, 0, 0, 0, 0, 0, 0, 77.221, 0, -101.123, 0, 0, 0, 0, 0, 0, 77.4988, 0, -127.517, 0, 0, 0, 0, 0, 0, 77.4427, 0, -147.267, 0, 0, 0, 0, 0, 0, 78.554, 0, -163.52, 0, 0, 0, 0, 0, 0, 86.8891, 0, -175.05, 0, 0, 0, 0, 0, 0, 96.7522, 0, -180.329, 0, 0, 0, 0, 0, 0, 117.173, 0, -180.468, 0, 0, 0, 0, 0, 0, 127.87, 0, -176.995, 0, 0, 0, 0, 0, 0, 136.899, 0, -167.826, 0, 0, 0, 0, 0, 0, 140.65, 0, -158.797, 0, 0, 0, 0, 0, 0, 141.067, 0, -143.377, 0, 0, 0, 0, 0, 0, 140.966, 0, -127.524, 0, 0, 0, 0, 0, 0, 141.521, 0, -107.937, 0, 0, 0, 0, 0, 0, 141.382, 0, -84.3211, 0, 0, 0, 0, 0, 0, 141.124, 0, -32.098, 0, 0, 0, 0, 0, 0, 140.522, 0, -7.55999, 0, 0, 0, 0, 0, 0, 137.883, 0, 0.913952, 0, 0, 0, 0, 0, 0, 132.187, 0, 7.0263, 0, 0, 0, 0, 0, 0, 124.546, 0, 10.4992, 0, 0, 0, 0, 0, 0, 113.711, 0, 11.0549, 0, 0, 0, 0, 0, 0, 96.7465, 0, 10.9951, 0, 0, 0, 0, 0, 0, 64.9345, 0, 11.273, 0, 0, 0, 0, 0, 0, 38.5403, 0, 10.9951, 0, 0, 0, 0, 0, 0, 13.5352, 0, 11.134, 0, 0, 0, 0, 0, 0, -13.6925, 0, 11.5508, 0, 0, 0, 0, 0, 0, -45.3236, 0, 11.8852, 0, 0, 0, 0, 0, 0, -145.069, 0, -188.901),
 "tilts": PackedFloat32Array(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0)
 }
 point_count = 103
 
-[sub_resource type="CylinderShape3D" id="CylinderShape3D_05o5k"]
-height = 10.0
-radius = 10.0
+[sub_resource type="CapsuleMesh" id="CapsuleMesh_x3f4s"]
 
-[sub_resource type="CapsuleMesh" id="CapsuleMesh_87mdl"]
+[node name="Node" type="Node"]
 
-[node name="world" type="Node3D"]
-script = ExtResource("1_ruuo8")
+[node name="Control" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
 
-[node name="RacingLine" type="Path3D" parent="."]
-curve = SubResource("Curve3D_sy0r4")
+[node name="HBoxContainer" type="HBoxContainer" parent="Control"]
+layout_mode = 1
+anchors_preset = 9
+anchor_bottom = 1.0
+offset_right = 6.0
+grow_vertical = 2
 
-[node name="PathFollow3D" type="PathFollow3D" parent="RacingLine"]
+[node name="SubViewportContainer" type="SubViewportContainer" parent="Control/HBoxContainer"]
+layout_mode = 2
+
+[node name="SubViewport" type="SubViewport" parent="Control/HBoxContainer/SubViewportContainer"]
+handle_input_locally = false
+size = Vector2i(575, 650)
+size_2d_override_stretch = true
+render_target_update_mode = 4
+
+[node name="race" parent="Control/HBoxContainer/SubViewportContainer/SubViewport" instance=ExtResource("1_qe5y8")]
+transform = Transform3D(6.98129e-05, 0, 1, 0, 1, 0, -1, 0, 6.98129e-05, 0, 0, 15.2181)
+
+[node name="HUD" type="CanvasLayer" parent="Control/HBoxContainer/SubViewportContainer/SubViewport"]
+
+[node name="time" type="Label" parent="Control/HBoxContainer/SubViewportContainer/SubViewport/HUD"]
+offset_left = 818.0
+offset_top = 11.0
+offset_right = 1047.0
+offset_bottom = 99.0
+text = "Time: "
+
+[node name="speed" type="Label" parent="Control/HBoxContainer/SubViewportContainer/SubViewport/HUD"]
+offset_left = 31.0
+offset_top = 19.0
+offset_right = 294.0
+offset_bottom = 120.0
+text = "Speed: "
+
+[node name="SubViewportContainer2" type="SubViewportContainer" parent="Control/HBoxContainer"]
+layout_mode = 2
+
+[node name="SubViewport" type="SubViewport" parent="Control/HBoxContainer/SubViewportContainer2"]
+handle_input_locally = false
+size = Vector2i(575, 650)
+render_target_update_mode = 4
+
+[node name="race2" parent="Control/HBoxContainer/SubViewportContainer2/SubViewport" instance=ExtResource("1_qe5y8")]
+transform = Transform3D(0.0775543, 0, 0.996988, 0, 1, 0, -0.996988, 0, 0.0775543, 0, 0, 9.36083)
+script = ExtResource("2_f6x5e")
+ENGINE_POWER = 100000
+REVERSE_SPEED = -35000
+
+[node name="Node3D" type="Node3D" parent="."]
+
+[node name="RacingLine" type="Path3D" parent="Node3D"]
+curve = SubResource("Curve3D_7m6t0")
+
+[node name="PathFollow3D" type="PathFollow3D" parent="Node3D/RacingLine"]
 transform = Transform3D(-0.0143285, 0, 0.999897, 0, 1, 0, -0.999897, 0, -0.0143285, -23.7337, 0, 16.635)
 
-[node name="track_2" parent="." instance=ExtResource("1_dw630")]
+[node name="track_2" parent="Node3D" instance=ExtResource("1_yipq5")]
 transform = Transform3D(8, 0, 0, 0, 2, 0, 0, 0, 8, 0, -0.0841339, 0)
 
-[node name="race" parent="." instance=ExtResource("2_775sa")]
-transform = Transform3D(0.025863, 0, 0.999666, 0, 1, 0, -0.999666, 0, 0.025863, 0.0662842, 1.05702, 11.7188)
-center_of_mass = Vector3(0, 0, 0)
-script = null
-
-[node name="Path3D" type="Path3D" parent="."]
+[node name="Path3D" type="Path3D" parent="Node3D"]
 visible = false
-curve = SubResource("Curve3D_0te2g")
+curve = SubResource("Curve3D_7rq0u")
 
-[node name="PathFollow3D" type="PathFollow3D" parent="Path3D"]
+[node name="PathFollow3D" type="PathFollow3D" parent="Node3D/Path3D"]
 transform = Transform3D(-0.0232498, 0, 0.99973, 0, 1, 0, -0.99973, 0, -0.0232498, -89.7989, 0, 11.0216)
 visible = false
 
-[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="Node3D"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 57.093, 9.91325, -84.6299)
 visible = false
 
-[node name="SpotLight3D" type="SpotLight3D" parent="."]
+[node name="SpotLight3D" type="SpotLight3D" parent="Node3D"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.294731, 59.8689, -24.849)
 visible = false
 light_energy = 16.0
 
-[node name="DirectionalLight3D2" type="DirectionalLight3D" parent="."]
+[node name="DirectionalLight3D2" type="DirectionalLight3D" parent="Node3D"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 57.093, 14.8967, -1.27869)
 
-[node name="DirectionalLight3D3" type="DirectionalLight3D" parent="."]
+[node name="DirectionalLight3D3" type="DirectionalLight3D" parent="Node3D"]
 transform = Transform3D(1, 0, 0, 0, 0.290635, 0.956834, 0, -0.956834, 0.290635, 1.76358, 79.1166, -21.8612)
 
-[node name="DirectionalLight3D3" type="DirectionalLight3D" parent="DirectionalLight3D3"]
+[node name="DirectionalLight3D3" type="DirectionalLight3D" parent="Node3D/DirectionalLight3D3"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -26.6392, 7.57815, 11.1715)
 
-[node name="suv" parent="." instance=ExtResource("6_meuha")]
-transform = Transform3D(0.149311, 0, 0.98879, 0, 1, 0, -0.98879, 0, 0.149311, 5.30852, 1.15886, 11.8414)
-script = null
-
-[node name="raceFuture" parent="." instance=ExtResource("8_wf0rq")]
-transform = Transform3D(0.0158993, 0, 0.999874, 0, 1, 0, -0.999874, 0, 0.0158993, 15.6043, 2.87889, 13.7416)
-script = null
-
-[node name="sedanSports" parent="." instance=ExtResource("5_me6ty")]
-transform = Transform3D(0.000959949, 0, 1, 0, 1, 0, -1, 0, 0.000959949, 5.03436, 0.182797, 8.0065)
-script = null
-
-[node name="police" parent="." instance=ExtResource("7_074fx")]
-transform = Transform3D(0.0758141, 0, 0.997122, 0, 1, 0, -0.997122, 0, 0.0758141, 11.295, 0.832799, 9.60537)
-script = null
-
-[node name="race2" parent="." instance=ExtResource("2_775sa")]
-transform = Transform3D(-0.0389982, 0, 0.999239, 0, 1, 0, -0.999239, 0, -0.0389982, -3.00297, 2.07998, 13.0017)
-script = null
-
-[node name="start" type="Area3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 10.1837, 15.2142)
-
-[node name="CollisionShape3D" type="CollisionShape3D" parent="start"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -7.12725, -5.30835, -2.22945)
-shape = SubResource("CylinderShape3D_05o5k")
-
-[node name="Timer" type="Timer" parent="."]
-
-[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Node3D"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -12.9894, 5.2295, 11.8164)
-mesh = SubResource("CapsuleMesh_87mdl")
-
-[node name="sedan2" parent="." instance=ExtResource("4_2nlaj")]
-transform = Transform3D(-0.00731287, 0, 0.999973, 0, 1, 0, -0.999973, 0, -0.00731287, -22.5417, 1.11872, 17.5966)
-script = ExtResource("9_q5uqk")
-max_speed = 1000.0
-steering_angle = 0.0
-johnson_carrot = 15
-steer_slow_threshold = 0.1
-racing_line_path = NodePath("../RacingLine")
-
-[node name="HUD" type="CanvasLayer" parent="sedan2"]
-
-[node name="time" type="Label" parent="sedan2/HUD"]
-offset_left = 818.0
-offset_top = 11.0
-offset_right = 1047.0
-offset_bottom = 99.0
-text = "Time: "
-metadata/_edit_use_anchors_ = true
-
-[node name="speed" type="Label" parent="sedan2/HUD"]
-offset_left = 31.0
-offset_top = 19.0
-offset_right = 294.0
-offset_bottom = 120.0
-text = "Speed: "
-metadata/_edit_use_anchors_ = true
-
-[node name="sedan" parent="." instance=ExtResource("4_2nlaj")]
-transform = Transform3D(-0.00731287, 0, 0.999973, 0, 1, 0, -0.999973, 0, -0.00731287, -17.951, 1.11872, 17.5966)
-
-[node name="HUD" type="CanvasLayer" parent="sedan"]
-
-[node name="time" type="Label" parent="sedan/HUD"]
-offset_left = 818.0
-offset_top = 11.0
-offset_right = 1047.0
-offset_bottom = 99.0
-text = "Time: "
-metadata/_edit_use_anchors_ = true
-
-[node name="speed" type="Label" parent="sedan/HUD"]
-offset_left = 31.0
-offset_top = 19.0
-offset_right = 294.0
-offset_bottom = 120.0
-text = "Speed: "
-metadata/_edit_use_anchors_ = true
-
-[connection signal="body_entered" from="start" to="." method="_on_start_body_entered"]
+mesh = SubResource("CapsuleMesh_x3f4s")

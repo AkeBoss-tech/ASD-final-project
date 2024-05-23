@@ -292,9 +292,12 @@ shape = SubResource("ConvexPolygonShape3D_cbrve")
 top_level = true
 
 [node name="Camera3D" type="Camera3D" parent="CameraPivot"]
-transform = Transform3D(0.627773, 0.167149, -0.760238, 0, 0.976672, 0.214735, 0.778397, -0.134805, 0.613128, -2.77367, 2, 3)
+transform = Transform3D(1, 0, 0, 0, 0.976672, 0.214735, 0, -0.214735, 0.976672, 0, 1.5, 3)
 current = true
-fov = 73.9
+fov = 67.5
+
+[node name="ReverseCamera" type="Camera3D" parent="CameraPivot"]
+transform = Transform3D(-1, 0, -8.74228e-08, -2.17692e-08, 0.968501, 0.249011, 8.4669e-08, 0.249011, -0.968501, 0, 1.83748, -0.763341)
 
 [node name="FrontRight" type="VehicleWheel3D" parent="."]
 transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 0.35, 0.3, -0.654773)
