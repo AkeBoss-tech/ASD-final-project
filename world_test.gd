@@ -49,7 +49,13 @@ func _on_car_speed_changed(speed, car):
 func _process(delta):
 	if not path or car_objects.size() == 0:
 		return
-
+		
+	if Input.is_action_pressed("ui_cancel"):
+		player.global_transform.origin = checkpoints[cars_data[player]["current_checkpoint_index"] - 1].global_transform.origin
+		player.global_transform.basis = checkpoints[cars_data[player]["current_checkpoint_index"] - 1].global_transform.basis
+		player.linear_velocity = Vector3.ZERO
+		player.angular_velocity = Vector3.ZERO
+	
 	for car in car_objects:
 		var car_position = car.global_transform.origin
 

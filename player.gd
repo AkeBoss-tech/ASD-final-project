@@ -69,9 +69,9 @@ func _physics_process(delta):
 	
 	emit_signal("speed_changed", speed)
 	
-	if Input.is_action_pressed("ui_cancel"):
+	"""if Input.is_action_pressed("ui_cancel"):
 		position = Vector3(position.x, position.y + 1, position.z)
-		rotation = Vector3(rotation.x, rotation.y, 0)
+		rotation = Vector3(rotation.x, rotation.y, 0)"""
 		
 
 

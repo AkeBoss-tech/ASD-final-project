@@ -1,8 +1,9 @@
-[gd_scene load_steps=16 format=3 uid="uid://ctcavvwu05qm7"]
+[gd_scene load_steps=17 format=3 uid="uid://ctcavvwu05qm7"]
 
 [ext_resource type="Script" path="res://world_test.gd" id="1_gljak"]
 [ext_resource type="PackedScene" uid="uid://ijwvc0wfeehw" path="res://track_2.tscn" id="2_5fokm"]
 [ext_resource type="PackedScene" uid="uid://cx4oc67e351vo" path="res://player.tscn" id="3_sgwct"]
+[ext_resource type="Script" path="res://mini_map.gd" id="4_113li"]
 [ext_resource type="PackedScene" uid="uid://rnh8ygv4e888" path="res://race_future.tscn" id="4_ei81m"]
 [ext_resource type="Script" path="res://ai_driver.gd" id="5_a8vmp"]
 
@@ -145,6 +146,31 @@ size_flags_vertical = 2
 text = "Best Time: 
 Speed: "
 label_settings = SubResource("LabelSettings_ssqck")
+
+[node name="SubViewportContainer" type="SubViewportContainer" parent="race2/HUD"]
+anchors_preset = -1
+anchor_top = 0.671296
+anchor_right = 0.15191
+anchor_bottom = 1.0
+offset_left = 21.0
+offset_top = -4.0
+offset_right = 21.0
+offset_bottom = -4.0
+grow_vertical = 0
+stretch = true
+metadata/_edit_use_anchors_ = true
+
+[node name="SubViewport" type="SubViewport" parent="race2/HUD/SubViewportContainer"]
+size = Vector2i(175, 213)
+
+[node name="Camera3D" type="Camera3D" parent="race2/HUD/SubViewportContainer/SubViewport"]
+transform = Transform3D(-4.37114e-08, -1, -4.37114e-08, 0, -4.37114e-08, 1, -1, 4.37114e-08, 1.91069e-15, -5.97361, 5.96288, 13.2583)
+projection = 1
+size = 60.0
+far = 100.0
+script = ExtResource("4_113li")
+target = NodePath("../../../..")
+distance = -55
 
 [node name="Timer" type="Timer" parent="."]
 
