@@ -1,0 +1,8 @@
+[gd_scene load_steps=2 format=3 uid="uid://bk4bgmd53mils"]
+
+[ext_resource type="PackedScene" uid="uid://rx8rs45hciuq" path="res://assets/kenney_racing_kit/billboard.glb" id="1_rhoab"]
+
+[node name="billboard" instance=ExtResource("1_rhoab")]
+
+[node name="billboard(Clone)" parent="." index="0"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.35, -0.01, -0.0121117)
