@@ -5,13 +5,14 @@ extends Control
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
-	# Get the screen size using the OS class
-	# Get the screen size using the DisplayServer class (Godot 4.0+)
-	var display_server = DisplayServer
-	var screen_size_display_server = display_server.get_window_size()
-	print("Screen size using DisplayServer: ", screen_size_display_server)
+	pass
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
-	pass
+	view1.size = Vector2(3, 2)
+	var display_server = DisplayServer
+	var screen_size_display_server = display_server.window_get_size(0)
+	
+	view1.size = Vector2(screen_size_display_server[0] / 2, screen_size_display_server[1])
+	view2.size = Vector2(screen_size_display_server[0] / 2, screen_size_display_server[1])
