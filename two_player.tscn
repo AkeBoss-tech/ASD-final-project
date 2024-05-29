@@ -1,5 +1,6 @@
-[gd_scene load_steps=7 format=3 uid="uid://o8qqsuune3hm"]
+[gd_scene load_steps=8 format=3 uid="uid://o8qqsuune3hm"]
 
+[ext_resource type="Script" path="res://Control.gd" id="1_kb88d"]
 [ext_resource type="PackedScene" uid="uid://cx4oc67e351vo" path="res://player.tscn" id="1_qe5y8"]
 [ext_resource type="PackedScene" uid="uid://ijwvc0wfeehw" path="res://track_2.tscn" id="1_yipq5"]
 [ext_resource type="Script" path="res://ai_driver.gd" id="2_hyhrd"]
@@ -29,58 +30,62 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+script = ExtResource("1_kb88d")
 
-[node name="HBoxContainer" type="HBoxContainer" parent="Control"]
+[node name="SubViewportContainer2" type="SubViewportContainer" parent="Control"]
 layout_mode = 1
-anchors_preset = 15
+anchors_preset = 10
 anchor_right = 1.0
-anchor_bottom = 1.0
+offset_bottom = 650.0
 grow_horizontal = 2
-grow_vertical = 2
 
-[node name="SubViewportContainer" type="SubViewportContainer" parent="Control/HBoxContainer"]
-layout_mode = 2
-
-[node name="SubViewport" type="SubViewport" parent="Control/HBoxContainer/SubViewportContainer"]
+[node name="SubViewport" type="SubViewport" parent="Control/SubViewportContainer2"]
 handle_input_locally = false
-size = Vector2i(575, 650)
+size_2d_override_stretch = true
 render_target_update_mode = 4
 
-[node name="race" parent="Control/HBoxContainer/SubViewportContainer/SubViewport" instance=ExtResource("1_qe5y8")]
-transform = Transform3D(6.98129e-05, 0, 1, 0, 1, 0, -1, 0, 6.98129e-05, 0, 0, 15.2181)
-
-[node name="HUD" type="CanvasLayer" parent="Control/HBoxContainer/SubViewportContainer/SubViewport"]
-
-[node name="time" type="Label" parent="Control/HBoxContainer/SubViewportContainer/SubViewport/HUD"]
-offset_left = 818.0
-offset_top = 11.0
-offset_right = 1047.0
-offset_bottom = 99.0
-text = "Time: "
-
-[node name="speed" type="Label" parent="Control/HBoxContainer/SubViewportContainer/SubViewport/HUD"]
-offset_left = 31.0
-offset_top = 19.0
-offset_right = 294.0
-offset_bottom = 120.0
-text = "Speed: "
-
-[node name="SubViewportContainer2" type="SubViewportContainer" parent="Control/HBoxContainer"]
-layout_mode = 2
-
-[node name="SubViewport" type="SubViewport" parent="Control/HBoxContainer/SubViewportContainer2"]
-handle_input_locally = false
-size = Vector2i(575, 650)
-render_target_update_mode = 4
-
-[node name="race2" parent="Control/HBoxContainer/SubViewportContainer2/SubViewport" instance=ExtResource("1_qe5y8")]
+[node name="race2" parent="Control/SubViewportContainer2/SubViewport" instance=ExtResource("1_qe5y8")]
 transform = Transform3D(0.0775543, 0, 0.996988, 0, 1, 0, -0.996988, 0, 0.0775543, 0, 0, 9.36083)
 script = ExtResource("2_hyhrd")
 max_speed = 1500.0
 steering_angle = 0.0
 johnson_carrot = 15
 steer_slow_threshold = 0.1
-racing_line_path = NodePath("../../../../../Node3D/RacingLine")
+racing_line_path = NodePath("../../../../Node3D/RacingLine")
+
+[node name="SubViewportContainer" type="SubViewportContainer" parent="Control"]
+layout_mode = 1
+anchors_preset = 12
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = -650.0
+grow_horizontal = 2
+grow_vertical = 0
+
+[node name="SubViewport" type="SubViewport" parent="Control/SubViewportContainer"]
+handle_input_locally = false
+size = Vector2i(575, 650)
+render_target_update_mode = 4
+
+[node name="race" parent="Control/SubViewportContainer/SubViewport" instance=ExtResource("1_qe5y8")]
+transform = Transform3D(6.98129e-05, 0, 1, 0, 1, 0, -1, 0, 6.98129e-05, 0, 0, 15.2181)
+
+[node name="HUD" type="CanvasLayer" parent="Control/SubViewportContainer/SubViewport"]
+
+[node name="time" type="Label" parent="Control/SubViewportContainer/SubViewport/HUD"]
+offset_left = 818.0
+offset_top = 11.0
+offset_right = 1047.0
+offset_bottom = 99.0
+text = "Time: "
+
+[node name="speed" type="Label" parent="Control/SubViewportContainer/SubViewport/HUD"]
+offset_left = 31.0
+offset_top = 19.0
+offset_right = 294.0
+offset_bottom = 120.0
+text = "Speed: "
 
 [node name="Node3D" type="Node3D" parent="."]
 
