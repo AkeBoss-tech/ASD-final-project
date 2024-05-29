@@ -38,7 +38,8 @@ func _physics_process(delta):
 	if Input.is_action_pressed("accelerate"):
 		engine_force = ENGINE_POWER * delta
 	elif Input.is_action_pressed("brake"):
-		brake = BRAKE_POWER
+		if linear_velocity.dot(linear_velocity.normalized()) > 0.01:
+			engine_force = REVERSE_SPEED * delta * 0.5
 		# engine_force = -BRAKE_POWER * delta
 	elif Input.is_action_pressed("decelerate"):
 		if linear_velocity.dot(linear_velocity.normalized()) > 0.01:
