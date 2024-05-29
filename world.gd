@@ -9,7 +9,9 @@ var cars_data = {}
 # Array of car objects
 @onready var car_objects = [
 	$sedan2,
-	$sedan
+	$sedan,
+	$raceFuture2,
+	$race3
 ]
 
 var path_global_transform
@@ -31,7 +33,9 @@ func _ready():
 		cars_data[car] = {
 			"time": 0,
 			"best_time": 999,
-			"current_checkpoint_index": 0
+			"current_checkpoint_index": 0,
+			"lap": 0,
+			"progress_percent": 0.0
 		}
 		car.connect("speed_changed", _on_car_speed_changed)
 	
@@ -56,7 +60,11 @@ func _process(delta):
 		var progress_percent = get_car_progress_percent(car_position_local) * 100
 		
 		cars_data[car]["time"] += delta
-		car.get_node("HUD/time").text = "TIME: " + str(cars_data[car]["time"]).pad_zeros(3).left(6) + " PROGRESS: " + str(round(progress_percent)) + "%"
+		cars_data[car]["progress_percent"] = progress_percent
+		car.get_node("HUD/time").text = "TIME: " + str(cars_data[car]["time"]).pad_zeros(3).left(6) + " PROGRESS: " + str(round(progress_percent)) + "% LAP: " + str(cars_data[car]["lap"])
+
+	# Update rankings based on current progress and laps
+	update_rankings()
 
 # Function to get car progress percentage
 func get_car_progress_percent(target_position_local):
@@ -146,3 +154,28 @@ func _on_start_body_entered(car):
 	print("Best lap time: ", car_data["best_time"])
 	# Reset the lap timer
 	car_data["time"] = 0
+	# Increment the lap counter
+	car_data["lap"] += 1
+
+# Function to update the rankings based on laps and progress percentage
+func update_rankings():
+	# Create a sorted list of cars based on laps and progress percentage
+	car_objects.sort_custom(compare_cars)
+
+	# Update HUD with rankings
+	for i in range(car_objects.size()):
+		var car = car_objects[i]
+		car.get_node("HUD/speed").text = str(i + 1) + "th"
+
+# Custom comparison function to sort cars by lap and progress percentage
+func compare_cars(a, b):
+	var a_data = cars_data[a]
+	var b_data = cars_data[b]
+
+	# Compare by laps first
+	if a_data["lap"] > b_data["lap"]:
+		return true
+	elif a_data["lap"] < b_data["lap"]:
+		return false
+	# If laps are equal, compare by progress percentage
+	return a_data["progress_percent"] > b_data["progress_percent"]

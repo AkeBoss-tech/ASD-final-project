@@ -10,7 +10,14 @@ signal speed_changed(speed)
 @onready var camera_pivot = $CameraPivot
 @onready var camera_3d = $CameraPivot/Camera3D
 @onready var reverse_camera = $CameraPivot/ReverseCamera
+@onready var audio = $Audio
+
 var look_at
+var previous_speed = 0
+@onready var tween = get_tree().create_tween().bind_node(self)
+
+
+@export var MAX_SPEED = 40
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
@@ -48,8 +55,30 @@ func _physics_process(delta):
 
 	var speed = linear_velocity.length()
 	
+	"""if abs(speed) > 1 and speed < MAX_SPEED:
+		audio.pitch_scale = 2 * engine_force / ENGINE_POWER + 1
+	elif speed < previous_speed and speed > 0:
+		audio.pitch_scale = speed / MAX_SPEED + 0.5
+		
+	if abs(speed) <= 0.1:
+		audio.stop()
+	elif not audio.playing: 
+		audio.play()"""
+	
+	previous_speed = speed
+	
 	emit_signal("speed_changed", speed)
 	
 	if Input.is_action_pressed("ui_cancel"):
 		position = Vector3(position.x, position.y + 1, position.z)
 		rotation = Vector3(rotation.x, rotation.y, 0)
+		
+
+
+
+func _on_body_entered(body):
+	$crash.play()
+
+
+func _on_crash_finished():
+	pass # Replace with function body.

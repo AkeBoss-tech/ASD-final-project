@@ -1,6 +1,7 @@
-[gd_scene load_steps=14 format=3 uid="uid://cx4oc67e351vo"]
+[gd_scene load_steps=15 format=3 uid="uid://cx4oc67e351vo"]
 
 [ext_resource type="Script" path="res://player.gd" id="1_aydre"]
+[ext_resource type="AudioStream" uid="uid://cakohl240jfkd" path="res://assets/sounds/engine.mp3" id="2_je4f2"]
 
 [sub_resource type="PhysicsMaterial" id="PhysicsMaterial_x371t"]
 
@@ -300,3 +301,6 @@ fov = 67.5
 
 [node name="ReverseCamera" type="Camera3D" parent="CameraPivot"]
 transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 0, 1, -0.5)
+
+[node name="Audio" type="AudioStreamPlayer3D" parent="."]
+stream = ExtResource("2_je4f2")
