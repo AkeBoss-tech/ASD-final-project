@@ -1,14 +1,25 @@
-[gd_scene load_steps=15 format=3 uid="uid://66ip25b6myac"]
+[gd_scene load_steps=16 format=3 uid="uid://ctcavvwu05qm7"]
 
-[ext_resource type="PackedScene" uid="uid://ijwvc0wfeehw" path="res://track_2.tscn" id="1_dw630"]
-[ext_resource type="Script" path="res://world.gd" id="1_ruuo8"]
-[ext_resource type="PackedScene" uid="uid://cx4oc67e351vo" path="res://player.tscn" id="2_775sa"]
-[ext_resource type="PackedScene" uid="uid://gyliv8ufctt7" path="res://sedan.tscn" id="4_2nlaj"]
-[ext_resource type="PackedScene" uid="uid://cgk847bk54co1" path="res://sedan_sports.tscn" id="5_me6ty"]
-[ext_resource type="PackedScene" uid="uid://cqgcwl8m0soko" path="res://suv.tscn" id="6_meuha"]
-[ext_resource type="PackedScene" uid="uid://dxl6tnexpnd3f" path="res://police.tscn" id="7_074fx"]
-[ext_resource type="PackedScene" uid="uid://rnh8ygv4e888" path="res://race_future.tscn" id="8_wf0rq"]
-[ext_resource type="Script" path="res://ai_driver.gd" id="9_q5uqk"]
+[ext_resource type="Script" path="res://world_test.gd" id="1_gljak"]
+[ext_resource type="PackedScene" uid="uid://ijwvc0wfeehw" path="res://track_2.tscn" id="2_5fokm"]
+[ext_resource type="PackedScene" uid="uid://cx4oc67e351vo" path="res://player.tscn" id="3_sgwct"]
+[ext_resource type="PackedScene" uid="uid://rnh8ygv4e888" path="res://race_future.tscn" id="4_ei81m"]
+[ext_resource type="Script" path="res://ai_driver.gd" id="5_a8vmp"]
+
+[sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_wdi7h"]
+sky_top_color = Color(0.570839, 0.541165, 0.916674, 1)
+sky_horizon_color = Color(0.658473, 0.656899, 0.635807, 1)
+ground_bottom_color = Color(0, 0.760784, 0.145098, 1)
+ground_horizon_color = Color(0.410058, 0.74063, 0.507242, 1)
+
+[sub_resource type="Sky" id="Sky_xd240"]
+sky_material = SubResource("ProceduralSkyMaterial_wdi7h")
+
+[sub_resource type="Environment" id="Environment_yx4xc"]
+background_mode = 2
+sky = SubResource("Sky_xd240")
+tonemap_mode = 2
+glow_enabled = true
 
 [sub_resource type="Curve3D" id="Curve3D_sy0r4"]
 _data = {
@@ -17,9 +28,21 @@ _data = {
 }
 point_count = 109
 
-[sub_resource type="CylinderShape3D" id="CylinderShape3D_05o5k"]
-height = 10.0
-radius = 10.0
+[sub_resource type="LabelSettings" id="LabelSettings_avw6r"]
+line_spacing = 5.0
+font_size = 30
+outline_size = 4
+outline_color = Color(0, 0, 0, 1)
+
+[sub_resource type="LabelSettings" id="LabelSettings_mqg0q"]
+font_size = 64
+outline_size = 2
+outline_color = Color(0.0728426, 0.0728426, 0.0728426, 1)
+
+[sub_resource type="LabelSettings" id="LabelSettings_ssqck"]
+font_size = 24
+outline_size = 4
+outline_color = Color(0, 0, 0, 1)
 
 [sub_resource type="CapsuleMesh" id="CapsuleMesh_87mdl"]
 
@@ -37,8 +60,11 @@ _data = {
 }
 point_count = 37
 
-[node name="world" type="Node3D"]
-script = ExtResource("1_ruuo8")
+[node name="world_test" type="Node3D"]
+script = ExtResource("1_gljak")
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_yx4xc")
 
 [node name="RacingLine" type="Path3D" parent="."]
 curve = SubResource("Curve3D_sy0r4")
@@ -46,13 +72,8 @@ curve = SubResource("Curve3D_sy0r4")
 [node name="PathFollow3D" type="PathFollow3D" parent="RacingLine"]
 transform = Transform3D(-0.0143285, 0, 0.999897, 0, 1, 0, -0.999897, 0, -0.0143285, -23.7337, 0, 16.635)
 
-[node name="track_2" parent="." instance=ExtResource("1_dw630")]
+[node name="track_2" parent="." instance=ExtResource("2_5fokm")]
 transform = Transform3D(8, 0, 0, 0, 2, 0, 0, 0, 8, 0, -0.0841339, 0)
-
-[node name="race" parent="." instance=ExtResource("2_775sa")]
-transform = Transform3D(0.025863, 0, 0.999666, 0, 1, 0, -0.999666, 0, 0.025863, 0.0662842, 1.05702, 11.7188)
-center_of_mass = Vector3(0, 0, 0)
-script = null
 
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 57.093, 9.91325, -84.6299)
@@ -72,70 +93,58 @@ transform = Transform3D(1, 0, 0, 0, 0.290635, 0.956834, 0, -0.956834, 0.290635, 
 [node name="DirectionalLight3D3" type="DirectionalLight3D" parent="DirectionalLight3D3"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -26.6392, 7.57815, 11.1715)
 
-[node name="suv" parent="." instance=ExtResource("6_meuha")]
-transform = Transform3D(0.149311, 0, 0.98879, 0, 1, 0, -0.98879, 0, 0.149311, 5.30852, 1.15886, 11.8414)
-script = ExtResource("9_q5uqk")
-max_speed = 1000.0
-steering_angle = 0.0
-johnson_carrot = 15
-steer_slow_threshold = 0.1
-racing_line_path = NodePath("../RacingLine")
+[node name="race2" parent="." instance=ExtResource("3_sgwct")]
+transform = Transform3D(-0.0389982, 0, 0.999239, 0, 1, 0, -0.999239, 0, -0.0389982, -3.00297, 2.07998, 13.0017)
 
-[node name="HUD" type="CanvasLayer" parent="suv"]
+[node name="HUD" type="CanvasLayer" parent="race2"]
 follow_viewport_enabled = true
 
-[node name="time" type="Label" parent="suv/HUD"]
-offset_left = 818.0
-offset_top = 11.0
-offset_right = 1047.0
-offset_bottom = 99.0
+[node name="time" type="Label" parent="race2/HUD"]
+anchors_preset = -1
+anchor_left = 0.846354
+anchor_right = 1.0
+anchor_bottom = 0.135802
+offset_left = -25.0
+offset_top = 25.0
+offset_right = -25.0
+offset_bottom = 25.0
+grow_horizontal = 0
+size_flags_horizontal = 10
 text = "Time: "
+label_settings = SubResource("LabelSettings_avw6r")
 metadata/_edit_use_anchors_ = true
 
-[node name="speed" type="Label" parent="suv/HUD"]
-offset_left = 31.0
-offset_top = 19.0
-offset_right = 294.0
-offset_bottom = 120.0
+[node name="rank" type="Label" parent="race2/HUD"]
+anchors_preset = -1
+anchor_right = 0.228299
+anchor_bottom = 0.155864
+offset_left = 14.0
+offset_top = 16.0
+offset_right = 14.0
+offset_bottom = 16.0
+size_flags_horizontal = 2
+size_flags_vertical = 2
 text = "Speed: "
+label_settings = SubResource("LabelSettings_mqg0q")
 metadata/_edit_use_anchors_ = true
 
-[node name="rank" type="Label" parent="suv/HUD"]
-offset_left = 1636.0
-offset_top = 22.0
-offset_right = 1865.0
-offset_bottom = 110.0
-text = "Rank
-"
-metadata/_edit_use_anchors_ = true
-
-[node name="TextureRect" type="TextureRect" parent="suv/HUD"]
-offset_right = 40.0
-offset_bottom = 40.0
-metadata/_edit_use_anchors_ = true
-
-[node name="raceFuture" parent="." instance=ExtResource("8_wf0rq")]
-transform = Transform3D(0.0158993, 0, 0.999874, 0, 1, 0, -0.999874, 0, 0.0158993, 15.6043, 2.87889, 13.7416)
-script = null
-
-[node name="sedanSports" parent="." instance=ExtResource("5_me6ty")]
-transform = Transform3D(0.000959949, 0, 1, 0, 1, 0, -1, 0, 0.000959949, 5.03436, 0.182797, 8.0065)
-script = null
-
-[node name="police" parent="." instance=ExtResource("7_074fx")]
-transform = Transform3D(0.0758141, 0, 0.997122, 0, 1, 0, -0.997122, 0, 0.0758141, 11.295, 0.832799, 9.60537)
-script = null
-
-[node name="race2" parent="." instance=ExtResource("2_775sa")]
-transform = Transform3D(-0.0389982, 0, 0.999239, 0, 1, 0, -0.999239, 0, -0.0389982, -3.00297, 2.07998, 13.0017)
-script = null
-
-[node name="start" type="Area3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 10.1837, 15.2142)
-
-[node name="CollisionShape3D" type="CollisionShape3D" parent="start"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -7.12725, -5.30835, -2.22945)
-shape = SubResource("CylinderShape3D_05o5k")
+[node name="speed" type="Label" parent="race2/HUD"]
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -96.0
+offset_top = -61.0
+offset_right = -15.0
+offset_bottom = -14.0
+grow_horizontal = 0
+grow_vertical = 0
+size_flags_horizontal = 6
+size_flags_vertical = 2
+text = "Best Time: 
+Speed: "
+label_settings = SubResource("LabelSettings_ssqck")
 
 [node name="Timer" type="Timer" parent="."]
 
@@ -143,147 +152,8 @@ shape = SubResource("CylinderShape3D_05o5k")
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -12.9894, 5.2295, 11.8164)
 mesh = SubResource("CapsuleMesh_87mdl")
 
-[node name="sedan2" parent="." instance=ExtResource("4_2nlaj")]
-transform = Transform3D(-0.00731287, 0, 0.999973, 0, 1, 0, -0.999973, 0, -0.00731287, -8.58502, 1.11872, 6.15132)
-script = ExtResource("9_q5uqk")
-max_speed = 1000.0
-steering_angle = 0.0
-johnson_carrot = 15
-steer_slow_threshold = 0.1
-racing_line_path = NodePath("../RacingLine")
-
-[node name="HUD" type="CanvasLayer" parent="sedan2"]
-follow_viewport_enabled = true
-
-[node name="time" type="Label" parent="sedan2/HUD"]
-offset_left = 818.0
-offset_top = 11.0
-offset_right = 1047.0
-offset_bottom = 99.0
-text = "Time: "
-metadata/_edit_use_anchors_ = true
-
-[node name="speed" type="Label" parent="sedan2/HUD"]
-offset_left = 31.0
-offset_top = 19.0
-offset_right = 294.0
-offset_bottom = 120.0
-text = "Speed: "
-metadata/_edit_use_anchors_ = true
-
-[node name="rank" type="Label" parent="sedan2/HUD"]
-offset_left = 1636.0
-offset_top = 22.0
-offset_right = 1865.0
-offset_bottom = 110.0
-text = "Rank
-"
-metadata/_edit_use_anchors_ = true
-
-[node name="sedan" parent="." instance=ExtResource("4_2nlaj")]
-transform = Transform3D(-0.00731287, 0, 0.999973, 0, 1, 0, -0.999973, 0, -0.00731287, 19.5081, 1.11872, 17.5966)
-
-[node name="HUD" type="CanvasLayer" parent="sedan"]
-follow_viewport_enabled = true
-
-[node name="time" type="Label" parent="sedan/HUD"]
-offset_left = 786.0
-offset_top = 167.0
-offset_right = 1015.0
-offset_bottom = 255.0
-text = "Time: "
-metadata/_edit_use_anchors_ = true
-
-[node name="speed" type="Label" parent="sedan/HUD"]
-offset_left = 42.0
-offset_top = 195.0
-offset_right = 305.0
-offset_bottom = 296.0
-text = "Speed: "
-metadata/_edit_use_anchors_ = true
-
-[node name="rank" type="Label" parent="sedan/HUD"]
-offset_left = 1636.0
-offset_top = 22.0
-offset_right = 1865.0
-offset_bottom = 110.0
-text = "Time: "
-metadata/_edit_use_anchors_ = true
-
 [node name="Path3D" type="Path3D" parent="."]
 curve = SubResource("Curve3D_in085")
-
-[node name="race3" parent="." instance=ExtResource("2_775sa")]
-transform = Transform3D(-0.00731287, 0, 0.999973, 0, 1, 0, -0.999973, 0, -0.00731287, 1.79016, 1.11872, 15.3029)
-script = ExtResource("9_q5uqk")
-max_speed = 1500.0
-steering_angle = 0.0
-johnson_carrot = 15
-steer_slow_threshold = 0.1
-racing_line_path = NodePath("../RacingLine")
-
-[node name="HUD" type="CanvasLayer" parent="race3"]
-follow_viewport_enabled = true
-
-[node name="time" type="Label" parent="race3/HUD"]
-offset_left = 786.0
-offset_top = 167.0
-offset_right = 1015.0
-offset_bottom = 255.0
-text = "Time: "
-metadata/_edit_use_anchors_ = true
-
-[node name="speed" type="Label" parent="race3/HUD"]
-offset_left = 42.0
-offset_top = 195.0
-offset_right = 305.0
-offset_bottom = 296.0
-text = "Speed: "
-metadata/_edit_use_anchors_ = true
-
-[node name="rank" type="Label" parent="race3/HUD"]
-offset_left = 1636.0
-offset_top = 22.0
-offset_right = 1865.0
-offset_bottom = 110.0
-text = "Time: "
-metadata/_edit_use_anchors_ = true
-
-[node name="raceFuture2" parent="." instance=ExtResource("8_wf0rq")]
-transform = Transform3D(0.0759359, 0, 0.997113, 0, 1, 0, -0.997113, 0, 0.0759359, 0, 0, 18.3827)
-script = ExtResource("9_q5uqk")
-max_speed = 1000.0
-steering_angle = 0.0
-johnson_carrot = 15
-steer_slow_threshold = 0.1
-racing_line_path = NodePath("../RacingLine2")
-
-[node name="HUD" type="CanvasLayer" parent="raceFuture2"]
-follow_viewport_enabled = true
-
-[node name="time" type="Label" parent="raceFuture2/HUD"]
-offset_left = 786.0
-offset_top = 167.0
-offset_right = 1015.0
-offset_bottom = 255.0
-text = "Time: "
-metadata/_edit_use_anchors_ = true
-
-[node name="speed" type="Label" parent="raceFuture2/HUD"]
-offset_left = 42.0
-offset_top = 195.0
-offset_right = 305.0
-offset_bottom = 296.0
-text = "Speed: "
-metadata/_edit_use_anchors_ = true
-
-[node name="rank" type="Label" parent="raceFuture2/HUD"]
-offset_left = 1636.0
-offset_top = 22.0
-offset_right = 1865.0
-offset_bottom = 110.0
-text = "Time: "
-metadata/_edit_use_anchors_ = true
 
 [node name="RacingLine2" type="Path3D" parent="."]
 curve = SubResource("Curve3D_u0qpn")
@@ -291,4 +161,11 @@ curve = SubResource("Curve3D_u0qpn")
 [node name="PathFollow3D" type="PathFollow3D" parent="RacingLine2"]
 transform = Transform3D(-0.0149986, 0, 0.999887, 0, 1, 0, -0.999887, 0, -0.0149986, -9.38081, 0, 9.9842)
 
-[connection signal="body_entered" from="start" to="." method="_on_start_body_entered"]
+[node name="raceFuture" parent="." instance=ExtResource("4_ei81m")]
+transform = Transform3D(0.117295, 0, 0.993097, 0, 1, 0, -0.993097, 0, 0.117295, 0, 4.50057, 17.9493)
+script = ExtResource("5_a8vmp")
+max_speed = 1000.0
+steering_angle = 0.0
+johnson_carrot = 15
+steer_slow_threshold = 0.1
+racing_line_path = NodePath("../RacingLine")
