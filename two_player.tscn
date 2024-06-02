@@ -1,11 +1,13 @@
-[gd_scene load_steps=16 format=3 uid="uid://o8qqsuune3hm"]
+[gd_scene load_steps=18 format=3 uid="uid://o8qqsuune3hm"]
 
 [ext_resource type="Script" path="res://Control.gd" id="1_kb88d"]
 [ext_resource type="PackedScene" uid="uid://cx4oc67e351vo" path="res://player.tscn" id="1_qe5y8"]
 [ext_resource type="Script" path="res://two_player.gd" id="1_yg8oo"]
 [ext_resource type="PackedScene" uid="uid://ijwvc0wfeehw" path="res://track_2.tscn" id="1_yipq5"]
 [ext_resource type="Script" path="res://mini_map.gd" id="4_8prmd"]
+[ext_resource type="Texture2D" uid="uid://c1nwlrn57u53x" path="res://assets/arrow.png" id="5_qm757"]
 [ext_resource type="Script" path="res://player_2.gd" id="5_wl7mi"]
+[ext_resource type="Texture2D" uid="uid://npq7axarv76x" path="res://assets/cancel.png" id="6_6n0qn"]
 
 [sub_resource type="LabelSettings" id="LabelSettings_at10b"]
 line_spacing = 5.0
@@ -166,6 +168,17 @@ script = ExtResource("4_8prmd")
 target = NodePath("../../../..")
 distance = -55
 
+[node name="CheckpointArrow" type="Sprite2D" parent="Control/SubViewportContainer2/SubViewport/race2/HUD"]
+position = Vector2(570, 114)
+rotation = 0.506145
+scale = Vector2(0.1, 0.1)
+texture = ExtResource("5_qm757")
+
+[node name="NO" type="Sprite2D" parent="Control/SubViewportContainer2/SubViewport/race2/HUD"]
+position = Vector2(568, 522)
+scale = Vector2(0.1, 0.1)
+texture = ExtResource("6_6n0qn")
+
 [node name="SubViewportContainer" type="SubViewportContainer" parent="Control"]
 layout_mode = 0
 offset_right = 575.0
@@ -258,6 +271,17 @@ far = 100.0
 script = ExtResource("4_8prmd")
 target = NodePath("../../../..")
 distance = -55
+
+[node name="CheckpointArrow" type="Sprite2D" parent="Control/SubViewportContainer/SubViewport/race/HUD"]
+position = Vector2(570, 114)
+rotation = 0.506145
+scale = Vector2(0.1, 0.1)
+texture = ExtResource("5_qm757")
+
+[node name="NO" type="Sprite2D" parent="Control/SubViewportContainer/SubViewport/race/HUD"]
+position = Vector2(568, 522)
+scale = Vector2(0.1, 0.1)
+texture = ExtResource("6_6n0qn")
 
 [node name="Node3D" type="Node3D" parent="."]
 

@@ -32,7 +32,7 @@ func _check_camera_switch():
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _physics_process(delta):
-	steering = move_toward(steering, Input.get_axis("right", "left") * max_steer, delta * 2.5)
+	steering = move_toward(steering, Input.get_axis("right", "left") * max_steer, delta * 1.5)
 	
 	engine_force = 0
 	if Input.is_action_pressed("accelerate"):

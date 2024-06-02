@@ -20,7 +20,8 @@ var path_global_transform
 var checkpoints = []
 
 # Number of checkpoints to generate
-@export var num_checkpoints = 10
+@export var num_checkpoints = 15
+@export var distance_checkpoint_arrow = 80
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
@@ -35,7 +36,8 @@ func _ready():
 			"best_time": 999,
 			"current_checkpoint_index": 0,
 			"lap": 0,
-			"progress_percent": 0.0
+			"progress_percent": 0.0,
+			"previous_progress_percent": 0.0,
 		}
 		car.connect("speed_changed", _on_car_speed_changed)
 	
@@ -66,11 +68,34 @@ func _process(delta):
 		var progress_percent = get_car_progress_percent(car_position_local) * 100
 		
 		cars_data[car]["time"] += delta
+		cars_data[car]["previous_progress_percent"] = cars_data[car]["progress_percent"]
 		cars_data[car]["progress_percent"] = progress_percent
 		
 		if car == player:
 			car.get_node("HUD/time").text = "TIME: " + str(cars_data[car]["time"]).pad_zeros(3).left(6) + "\nPROGRESS: " + str(round(progress_percent)) + "%\nLAP: " + str(cars_data[car]["lap"])
 			car.get_node("HUD/speed").text = "Best Time: " + str(cars_data[car]["best_time"]).pad_zeros(3).left(6) + "\nSpeed: " + str(round(car.linear_velocity.length()))
+			
+			# Checkpoint arrow point code
+			var checkpoint_position = checkpoints[cars_data[car]["current_checkpoint_index"]].position
+			var difference = checkpoint_position - car.position
+			
+			var reverse = 0 if car.linear_velocity.dot(car.transform.basis.z) < 0.01 else PI
+			
+			car.get_node("HUD/CheckpointArrow").rotation = car.rotation.y + atan2(difference.z , difference.x) + reverse
+			var display_server = DisplayServer
+			var screen_size_display_server = display_server.window_get_size(0)
+				
+			if difference.length() > distance_checkpoint_arrow:
+				car.get_node("HUD/CheckpointArrow").visible = true
+				car.get_node("HUD/CheckpointArrow").position = Vector2(screen_size_display_server[0]/2, screen_size_display_server[1]/5)
+			else:
+				car.get_node("HUD/CheckpointArrow").visible = false
+				
+			if cars_data[car]["previous_progress_percent"] > cars_data[car]["progress_percent"]:
+				car.get_node("HUD/NO").position = Vector2(screen_size_display_server[0]/2, screen_size_display_server[1] * 4/5)
+				car.get_node("HUD/NO").visible = true
+			else:
+				car.get_node("HUD/NO").visible = false
 
 	# Update rankings based on current progress and laps
 	update_rankings()
@@ -81,7 +106,7 @@ func get_car_progress_percent(target_position_local):
 	var closest_distance = float(INF)
 	var closest_offset = 0.0
 	var path_length = path_curve.get_baked_length()
-	var step_size = 10.0  # Smaller step size means more precise but more computationally expensive
+	var step_size = 5.0  # Smaller step size means more precise but more computationally expensive
 	
 	# Iterate along the path to find the closest point to the car's position
 	for distance_along_path in range(0, path_length, step_size):

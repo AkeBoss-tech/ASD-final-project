@@ -1,11 +1,13 @@
-[gd_scene load_steps=17 format=3 uid="uid://ctcavvwu05qm7"]
+[gd_scene load_steps=19 format=3 uid="uid://ctcavvwu05qm7"]
 
 [ext_resource type="Script" path="res://world_test.gd" id="1_gljak"]
 [ext_resource type="PackedScene" uid="uid://ijwvc0wfeehw" path="res://track_2.tscn" id="2_5fokm"]
 [ext_resource type="PackedScene" uid="uid://cx4oc67e351vo" path="res://player.tscn" id="3_sgwct"]
 [ext_resource type="Script" path="res://mini_map.gd" id="4_113li"]
 [ext_resource type="PackedScene" uid="uid://rnh8ygv4e888" path="res://race_future.tscn" id="4_ei81m"]
+[ext_resource type="Texture2D" uid="uid://c1nwlrn57u53x" path="res://assets/arrow.png" id="5_5cet1"]
 [ext_resource type="Script" path="res://ai_driver.gd" id="5_a8vmp"]
+[ext_resource type="Texture2D" uid="uid://npq7axarv76x" path="res://assets/cancel.png" id="6_wjtbu"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_wdi7h"]
 sky_top_color = Color(0.570839, 0.541165, 0.916674, 1)
@@ -166,7 +168,7 @@ handle_input_locally = false
 size = Vector2i(175, 213)
 render_target_update_mode = 4
 
-[node name="Camera3D" type="Camera3D" parent="race2/HUD/SubViewportContainer/SubViewport"]
+[node name="MiniMap" type="Camera3D" parent="race2/HUD/SubViewportContainer/SubViewport"]
 transform = Transform3D(-4.37114e-08, -1, -4.37114e-08, 0, -4.37114e-08, 1, -1, 4.37114e-08, 1.91069e-15, -5.97361, 5.96288, 13.2583)
 projection = 1
 size = 60.0
@@ -174,6 +176,17 @@ far = 100.0
 script = ExtResource("4_113li")
 target = NodePath("../../../..")
 distance = -55
+
+[node name="CheckpointArrow" type="Sprite2D" parent="race2/HUD"]
+position = Vector2(570, 114)
+rotation = 0.506145
+scale = Vector2(0.1, 0.1)
+texture = ExtResource("5_5cet1")
+
+[node name="NO" type="Sprite2D" parent="race2/HUD"]
+position = Vector2(568, 522)
+scale = Vector2(0.1, 0.1)
+texture = ExtResource("6_wjtbu")
 
 [node name="Timer" type="Timer" parent="."]
 
