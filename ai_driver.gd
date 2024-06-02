@@ -1,12 +1,13 @@
 extends VehicleBody3D
 
 # Nodes
-var path_follow: PathFollow3D
+@export var path_follow: PathFollow3D
 var vehicle: VehicleBody3D
 
 # Parameters
 var waypoints = []
 @export var max_speed = 1000.0 # Desired speed
+var speed_use = max_speed
 @export var steering_angle = 0.0 # Current steering angle
 var target_marker
 @export var johnson_carrot = 15
@@ -22,10 +23,15 @@ var time_since_movement = 0.0
 var reversing = false
 var reverse_timer = 0.0
 
+func reduce_speed(multi):
+	speed_use = max_speed * multi
+	
+func normal_speed():
+	speed_use = max_speed
+
 func _ready():
 	# Initialize nodes
 	var path = get_node(racing_line_path)
-	path_follow = path.get_node("PathFollow3D")
 
 	# Initialize timer
 	timer = Timer.new()
@@ -101,9 +107,9 @@ func _follow_path():
 
 			# LIMIT TARGET SPEED IF NOT FACING RIGHT DIRECTION
 			var angle_difference = abs(steering_angle)
-			var target_speed = max_speed
+			var target_speed = speed_use
 			if angle_difference > steer_slow_threshold:
-				target_speed = max_speed * (1.0 - angle_difference / PI)
+				target_speed = speed_use * (1.0 - angle_difference / PI)
 
 			# check if the steering angle is greater than pi/2
 			# if so reverse the car and set the steering angle to pi - steering angle

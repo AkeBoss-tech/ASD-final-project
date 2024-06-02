@@ -23,4 +23,4 @@ func _on_two_player_button_pressed():
 	get_tree().change_scene_to_file("res://two_player.tscn")
 
 func _on_grand_prix_button_pressed():
-	get_tree().change_scene_to_file("res://world.tscn")
+	get_tree().change_scene_to_file("res://grand_prix.tscn")
