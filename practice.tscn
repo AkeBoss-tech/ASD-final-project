@@ -1,12 +1,10 @@
-[gd_scene load_steps=23 format=3 uid="uid://ctcavvwu05qm7"]
+[gd_scene load_steps=21 format=3 uid="uid://cb34jrtfnno52"]
 
-[ext_resource type="Script" path="res://world_test.gd" id="1_gljak"]
+[ext_resource type="Script" path="res://practice.gd" id="1_gljak"]
 [ext_resource type="PackedScene" uid="uid://ijwvc0wfeehw" path="res://track_2.tscn" id="2_5fokm"]
 [ext_resource type="PackedScene" uid="uid://cx4oc67e351vo" path="res://player.tscn" id="3_sgwct"]
 [ext_resource type="Script" path="res://mini_map.gd" id="4_113li"]
-[ext_resource type="PackedScene" uid="uid://rnh8ygv4e888" path="res://race_future.tscn" id="4_ei81m"]
 [ext_resource type="Texture2D" uid="uid://c1nwlrn57u53x" path="res://assets/arrow.png" id="5_5cet1"]
-[ext_resource type="Script" path="res://ai_driver.gd" id="5_a8vmp"]
 [ext_resource type="Texture2D" uid="uid://npq7axarv76x" path="res://assets/cancel.png" id="6_wjtbu"]
 [ext_resource type="PackedScene" uid="uid://dl0vd4tfmtslt" path="res://assets/kenney_racing_kit/billboardDouble_exclusive.glb" id="7_28cv3"]
 [ext_resource type="PackedScene" uid="uid://8w0kv464ykl0" path="res://assets/kenney_racing_kit/camera_exclusive.glb" id="8_c0i2q"]
@@ -66,18 +64,14 @@ _data = {
 }
 point_count = 37
 
-[node name="world_test" type="Node3D"]
+[node name="practice" type="Node3D"]
 script = ExtResource("1_gljak")
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
 environment = SubResource("Environment_yx4xc")
 
 [node name="RacingLine" type="Path3D" parent="."]
-visible = false
 curve = SubResource("Curve3D_sy0r4")
-
-[node name="PathFollow3D" type="PathFollow3D" parent="RacingLine"]
-transform = Transform3D(-0.0143285, 0, 0.999897, 0, 1, 0, -0.999897, 0, -0.0143285, -23.7337, 0, 16.635)
 
 [node name="track_2" parent="." instance=ExtResource("2_5fokm")]
 transform = Transform3D(8, 0, 0, 0, 2, 0, 0, 0, 8, 0, -0.0841339, 0)
@@ -101,7 +95,7 @@ transform = Transform3D(1, 0, 0, 0, 0.290635, 0.956834, 0, -0.956834, 0.290635, 
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -26.6392, 7.57815, 11.1715)
 
 [node name="race2" parent="." instance=ExtResource("3_sgwct")]
-transform = Transform3D(0.00776664, 0, 0.99997, 0, 1, 0, -0.99997, 0, 0.00776664, -3.4546, 2.07998, 9.04996)
+transform = Transform3D(-0.0389982, 0, 0.999239, 0, 1, 0, -0.999239, 0, -0.0389982, 0.115848, 0.723037, 14.6039)
 
 [node name="HUD" type="CanvasLayer" parent="race2"]
 follow_viewport_enabled = true
@@ -198,21 +192,7 @@ texture = ExtResource("6_wjtbu")
 curve = SubResource("Curve3D_in085")
 
 [node name="RacingLine2" type="Path3D" parent="."]
-visible = false
 curve = SubResource("Curve3D_u0qpn")
-
-[node name="PathFollow3D" type="PathFollow3D" parent="RacingLine2"]
-transform = Transform3D(-0.0149986, 0, 0.999887, 0, 1, 0, -0.999887, 0, -0.0149986, -9.38081, 0, 9.9842)
-
-[node name="raceFuture" parent="." node_paths=PackedStringArray("path_follow") instance=ExtResource("4_ei81m")]
-transform = Transform3D(0.02691, 0, 0.999638, 0, 1, 0, -0.999638, 0, 0.02691, -3.42484, 4.50057, 17.9493)
-script = ExtResource("5_a8vmp")
-path_follow = NodePath("../RacingLine/PathFollow3D")
-max_speed = 1500.0
-steering_angle = 0.0
-johnson_carrot = 15
-steer_slow_threshold = 0.1
-racing_line_path = NodePath("../RacingLine")
 
 [node name="RandomAssets" type="Node3D" parent="."]
 

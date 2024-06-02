@@ -287,6 +287,7 @@ texture = ExtResource("6_6n0qn")
 [node name="Node3D" type="Node3D" parent="."]
 
 [node name="RacingLine" type="Path3D" parent="Node3D"]
+visible = false
 curve = SubResource("Curve3D_7m6t0")
 
 [node name="PathFollow3D" type="PathFollow3D" parent="Node3D/RacingLine"]
@@ -296,6 +297,7 @@ transform = Transform3D(-0.0143285, 0, 0.999897, 0, 1, 0, -0.999897, 0, -0.01432
 transform = Transform3D(8, 0, 0, 0, 2, 0, 0, 0, 8, 0, -0.0841339, 0)
 
 [node name="Path3D" type="Path3D" parent="Node3D"]
+visible = false
 curve = SubResource("Curve3D_7rq0u")
 
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="Node3D"]
