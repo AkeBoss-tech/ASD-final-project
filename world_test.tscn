@@ -1,4 +1,4 @@
-[gd_scene load_steps=19 format=3 uid="uid://ctcavvwu05qm7"]
+[gd_scene load_steps=23 format=3 uid="uid://ctcavvwu05qm7"]
 
 [ext_resource type="Script" path="res://world_test.gd" id="1_gljak"]
 [ext_resource type="PackedScene" uid="uid://ijwvc0wfeehw" path="res://track_2.tscn" id="2_5fokm"]
@@ -11,6 +11,8 @@
 [ext_resource type="PackedScene" uid="uid://dl0vd4tfmtslt" path="res://assets/kenney_racing_kit/billboardDouble_exclusive.glb" id="7_28cv3"]
 [ext_resource type="PackedScene" uid="uid://8w0kv464ykl0" path="res://assets/kenney_racing_kit/camera_exclusive.glb" id="8_c0i2q"]
 [ext_resource type="PackedScene" uid="uid://c6lrrfn2nm60a" path="res://assets/kenney_racing_kit/flagTankco.glb" id="9_d3hnf"]
+[ext_resource type="PackedScene" uid="uid://d1cje8yfqo6f6" path="res://pause_menu.tscn" id="12_4svxx"]
+[ext_resource type="PackedScene" uid="uid://bwc8t3egeaiv7" path="res://results.tscn" id="13_h3seq"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_wdi7h"]
 sky_top_color = Color(0.570839, 0.541165, 0.916674, 1)
@@ -219,3 +221,8 @@ transform = Transform3D(3.26245, 0, 2.31439, 0, 4, 0, -2.31439, 0, 3.26245, -55.
 
 [node name="flagTankco" parent="RandomAssets" instance=ExtResource("9_d3hnf")]
 transform = Transform3D(8, 0, 0, 0, 2, 0, 0, 0, 8, 114.623, 2.00845, 31.0385)
+
+[node name="Results" parent="." instance=ExtResource("13_h3seq")]
+visible = false
+
+[node name="PauseMenu" parent="." instance=ExtResource("12_4svxx")]

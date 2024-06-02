@@ -7,6 +7,7 @@ var cars_data = {}
 @onready var path = $Path3D
 
 @onready var player = $race2
+@onready var pause = $PauseMenu
 
 # Array of car objects
 @onready var car_objects = [
@@ -42,17 +43,31 @@ func _ready():
 		car.connect("speed_changed", _on_car_speed_changed)
 	
 	generate_checkpoints()
+	pause.hide()
 
 # Function to update the HUD for a specific car
 func _on_car_speed_changed(speed, car):
 	car.get_node("HUD/speed").text = "Speed: " + str(round(speed)) + " units/sec"
+	
+func pauseMenu():
+	if not get_tree().paused:
+		pause.hide()
+		player.get_node("HUD").show()
+	else:
+		pause.show()
+		player.get_node("HUD").hide()
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
 	if not path or car_objects.size() == 0:
 		return
 		
-	if Input.is_action_pressed("ui_cancel"):
+	if Input.is_action_pressed("pause"):
+		get_tree().paused = true
+	
+	pauseMenu()
+		
+	if Input.is_action_pressed("respawn"):
 		player.global_transform.origin = checkpoints[cars_data[player]["current_checkpoint_index"] - 1].global_transform.origin
 		player.global_transform.basis = checkpoints[cars_data[player]["current_checkpoint_index"] - 1].global_transform.basis
 		player.linear_velocity = Vector3.ZERO
@@ -72,7 +87,7 @@ func _process(delta):
 		cars_data[car]["progress_percent"] = progress_percent
 		
 		if car == player:
-			car.get_node("HUD/time").text = "TIME: " + str(cars_data[car]["time"]).pad_zeros(3).left(6) + "\nPROGRESS: " + str(round(progress_percent)) + "%\nLAP: " + str(cars_data[car]["lap"])
+			car.get_node("HUD/time").text = "TIME: " + str(cars_data[car]["time"]).pad_zeros(3).left(6) + "\nPROGRESS: " + str(round(progress_percent)) + "%\nLAP: " + str(cars_data[car]["lap"] + 1) + " / 3"
 			car.get_node("HUD/speed").text = "Best Time: " + str(cars_data[car]["best_time"]).pad_zeros(3).left(6) + "\nSpeed: " + str(round(car.linear_velocity.length()))
 			
 			# Checkpoint arrow point code

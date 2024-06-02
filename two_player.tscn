@@ -1,4 +1,4 @@
-[gd_scene load_steps=18 format=3 uid="uid://o8qqsuune3hm"]
+[gd_scene load_steps=19 format=3 uid="uid://o8qqsuune3hm"]
 
 [ext_resource type="Script" path="res://Control.gd" id="1_kb88d"]
 [ext_resource type="PackedScene" uid="uid://cx4oc67e351vo" path="res://player.tscn" id="1_qe5y8"]
@@ -8,6 +8,7 @@
 [ext_resource type="Texture2D" uid="uid://c1nwlrn57u53x" path="res://assets/arrow.png" id="5_qm757"]
 [ext_resource type="Script" path="res://player_2.gd" id="5_wl7mi"]
 [ext_resource type="Texture2D" uid="uid://npq7axarv76x" path="res://assets/cancel.png" id="6_6n0qn"]
+[ext_resource type="PackedScene" uid="uid://d1cje8yfqo6f6" path="res://pause_menu.tscn" id="9_238xc"]
 
 [sub_resource type="LabelSettings" id="LabelSettings_at10b"]
 line_spacing = 5.0
@@ -321,3 +322,5 @@ mesh = SubResource("CapsuleMesh_x3f4s")
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="Node3D"]
 environment = SubResource("Environment_f4li1")
+
+[node name="PauseMenu" parent="." instance=ExtResource("9_238xc")]

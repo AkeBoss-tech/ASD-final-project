@@ -9,6 +9,8 @@ var cars_data = {}
 @export var player1: VehicleBody3D
 @export var player2: VehicleBody3D
 
+@onready var pause = $PauseMenu
+
 # Array of car objects
 @onready var car_objects = [
 	player1, player2
@@ -43,21 +45,31 @@ func _ready():
 		car.connect("speed_changed", _on_car_speed_changed)
 	
 	generate_checkpoints()
+	pause.hide()
 
 # Function to update the HUD for a specific car
 func _on_car_speed_changed(speed, car):
 	car.get_node("HUD/speed").text = "Speed: " + str(round(speed)) + " units/sec"
+
+func pauseMenu():
+	if not get_tree().paused:
+		pause.hide()
+		player1.get_node("HUD").show()
+		player2.get_node("HUD").show()
+	else:
+		pause.show()
+		player1.get_node("HUD").hide()
+		player2.get_node("HUD").hide()
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
 	if not path or car_objects.size() == 0:
 		return
 		
-	"""if Input.is_action_pressed("ui_cancel"):
-		player.global_transform.origin = checkpoints[cars_data[player]["current_checkpoint_index"] - 1].global_transform.origin
-		player.global_transform.basis = checkpoints[cars_data[player]["current_checkpoint_index"] - 1].global_transform.basis
-		player.linear_velocity = Vector3.ZERO
-		player.angular_velocity = Vector3.ZERO"""
+	if Input.is_action_pressed("pause"):
+		get_tree().paused = true
+	
+	pauseMenu()
 	
 	if Input.is_action_pressed("respawn"):
 		player1.global_transform.origin = checkpoints[cars_data[player1]["current_checkpoint_index"] - 1].global_transform.origin
