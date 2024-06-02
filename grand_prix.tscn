@@ -1,6 +1,6 @@
-[gd_scene load_steps=23 format=3 uid="uid://ctcavvwu05qm7"]
+[gd_scene load_steps=26 format=3 uid="uid://cajwqpyr1pm6q"]
 
-[ext_resource type="Script" path="res://world_test.gd" id="1_gljak"]
+[ext_resource type="Script" path="res://grand_prix.gd" id="1_gljak"]
 [ext_resource type="PackedScene" uid="uid://ijwvc0wfeehw" path="res://track_2.tscn" id="2_5fokm"]
 [ext_resource type="PackedScene" uid="uid://cx4oc67e351vo" path="res://player.tscn" id="3_sgwct"]
 [ext_resource type="Script" path="res://mini_map.gd" id="4_113li"]
@@ -13,6 +13,9 @@
 [ext_resource type="PackedScene" uid="uid://c6lrrfn2nm60a" path="res://assets/kenney_racing_kit/flagTankco.glb" id="9_d3hnf"]
 [ext_resource type="PackedScene" uid="uid://d1cje8yfqo6f6" path="res://pause_menu.tscn" id="12_4svxx"]
 [ext_resource type="PackedScene" uid="uid://bwc8t3egeaiv7" path="res://results.tscn" id="13_h3seq"]
+[ext_resource type="PackedScene" uid="uid://dxl6tnexpnd3f" path="res://police.tscn" id="14_i4mu8"]
+[ext_resource type="PackedScene" uid="uid://gyliv8ufctt7" path="res://sedan.tscn" id="16_1u3jb"]
+[ext_resource type="PackedScene" uid="uid://cgk847bk54co1" path="res://sedan_sports.tscn" id="17_26bq1"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_wdi7h"]
 sky_top_color = Color(0.570839, 0.541165, 0.916674, 1)
@@ -66,17 +69,22 @@ _data = {
 }
 point_count = 37
 
-[node name="world_test" type="Node3D"]
+[node name="grand_prix" type="Node3D"]
 script = ExtResource("1_gljak")
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
 environment = SubResource("Environment_yx4xc")
 
 [node name="RacingLine" type="Path3D" parent="."]
-visible = false
 curve = SubResource("Curve3D_sy0r4")
 
 [node name="PathFollow3D" type="PathFollow3D" parent="RacingLine"]
+transform = Transform3D(-0.0143285, 0, 0.999897, 0, 1, 0, -0.999897, 0, -0.0143285, -23.7337, 0, 16.635)
+
+[node name="PathFollow3D2" type="PathFollow3D" parent="RacingLine"]
+transform = Transform3D(-0.0143285, 0, 0.999897, 0, 1, 0, -0.999897, 0, -0.0143285, -23.7337, 0, 16.635)
+
+[node name="PathFollow3D3" type="PathFollow3D" parent="RacingLine"]
 transform = Transform3D(-0.0143285, 0, 0.999897, 0, 1, 0, -0.999897, 0, -0.0143285, -23.7337, 0, 16.635)
 
 [node name="track_2" parent="." instance=ExtResource("2_5fokm")]
@@ -101,7 +109,7 @@ transform = Transform3D(1, 0, 0, 0, 0.290635, 0.956834, 0, -0.956834, 0.290635, 
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -26.6392, 7.57815, 11.1715)
 
 [node name="race2" parent="." instance=ExtResource("3_sgwct")]
-transform = Transform3D(0.00776664, 0, 0.99997, 0, 1, 0, -0.99997, 0, 0.00776664, -3.4546, 2.07998, 9.04996)
+transform = Transform3D(-0.0389982, 0, 0.999239, 0, 1, 0, -0.999239, 0, -0.0389982, 12.7551, 0.723037, 13.0017)
 
 [node name="HUD" type="CanvasLayer" parent="race2"]
 follow_viewport_enabled = true
@@ -198,17 +206,19 @@ texture = ExtResource("6_wjtbu")
 curve = SubResource("Curve3D_in085")
 
 [node name="RacingLine2" type="Path3D" parent="."]
-visible = false
 curve = SubResource("Curve3D_u0qpn")
 
 [node name="PathFollow3D" type="PathFollow3D" parent="RacingLine2"]
 transform = Transform3D(-0.0149986, 0, 0.999887, 0, 1, 0, -0.999887, 0, -0.0149986, -9.38081, 0, 9.9842)
 
+[node name="PathFollow3D2" type="PathFollow3D" parent="RacingLine2"]
+transform = Transform3D(-0.0149986, 0, 0.999887, 0, 1, 0, -0.999887, 0, -0.0149986, -9.38081, 0, 9.9842)
+
 [node name="raceFuture" parent="." node_paths=PackedStringArray("path_follow") instance=ExtResource("4_ei81m")]
-transform = Transform3D(0.02691, 0, 0.999638, 0, 1, 0, -0.999638, 0, 0.02691, -3.42484, 4.50057, 17.9493)
+transform = Transform3D(0.117295, 0, 0.993097, 0, 1, 0, -0.993097, 0, 0.117295, 0, 0.795076, 17.9493)
 script = ExtResource("5_a8vmp")
-path_follow = NodePath("../RacingLine/PathFollow3D")
-max_speed = 1500.0
+path_follow = NodePath("../RacingLine/PathFollow3D3")
+max_speed = 1000.0
 steering_angle = 0.0
 johnson_carrot = 15
 steer_slow_threshold = 0.1
@@ -229,3 +239,43 @@ transform = Transform3D(8, 0, 0, 0, 2, 0, 0, 0, 8, 114.623, 2.00845, 31.0385)
 visible = false
 
 [node name="PauseMenu" parent="." instance=ExtResource("12_4svxx")]
+
+[node name="police" parent="." node_paths=PackedStringArray("path_follow") instance=ExtResource("14_i4mu8")]
+transform = Transform3D(-0.0977913, 0, 0.995207, 0, 1, 0, -0.995207, 0, -0.0977913, 10.8312, 0, 17.8892)
+script = ExtResource("5_a8vmp")
+path_follow = NodePath("../RacingLine/PathFollow3D")
+max_speed = 1500.0
+steering_angle = 0.0
+johnson_carrot = 15
+steer_slow_threshold = 0.1
+racing_line_path = NodePath("../RacingLine")
+
+[node name="sedan" parent="." node_paths=PackedStringArray("path_follow") instance=ExtResource("16_1u3jb")]
+transform = Transform3D(-0.054532, 0, 0.998512, 0, 1, 0, -0.998512, 0, -0.054532, 4.7253, 0, 17.7675)
+script = ExtResource("5_a8vmp")
+path_follow = NodePath("../RacingLine2/PathFollow3D")
+max_speed = 1500.0
+steering_angle = 0.0
+johnson_carrot = 15
+steer_slow_threshold = 0.1
+racing_line_path = NodePath("../RacingLine2")
+
+[node name="sedanSports" parent="." node_paths=PackedStringArray("path_follow") instance=ExtResource("17_26bq1")]
+transform = Transform3D(0.101473, 0, 0.994838, 0, 1, 0, -0.994838, 0, 0.101473, 0.0114355, 0, 12.7632)
+script = ExtResource("5_a8vmp")
+path_follow = NodePath("../RacingLine2/PathFollow3D2")
+max_speed = 2000.0
+steering_angle = 0.0
+johnson_carrot = 15
+steer_slow_threshold = 0.1
+racing_line_path = NodePath("../RacingLine2")
+
+[node name="race" parent="." node_paths=PackedStringArray("path_follow") instance=ExtResource("3_sgwct")]
+transform = Transform3D(0.083504, 0, 0.996507, 0, 1, 0, -0.996507, 0, 0.083504, 5.47849, 0, 12.5329)
+script = ExtResource("5_a8vmp")
+path_follow = NodePath("../RacingLine/PathFollow3D2")
+max_speed = 1500.0
+steering_angle = 0.0
+johnson_carrot = 15
+steer_slow_threshold = 0.1
+racing_line_path = NodePath("../RacingLine")

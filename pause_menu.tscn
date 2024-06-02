@@ -1,0 +1,57 @@
+[gd_scene load_steps=4 format=3 uid="uid://d1cje8yfqo6f6"]
+
+[ext_resource type="Shader" path="res://pause.gdshader" id="1_hkl4q"]
+[ext_resource type="Script" path="res://pause_menu.gd" id="1_qiswt"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_7pkh2"]
+shader = ExtResource("1_hkl4q")
+shader_parameter/amount = 3.0
+
+[node name="PauseMenu" type="Control"]
+process_mode = 2
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_qiswt")
+
+[node name="ColorRect" type="ColorRect" parent="."]
+material = SubResource("ShaderMaterial_7pkh2")
+layout_mode = 1
+anchors_preset = -1
+anchor_left = -1.30469
+anchor_top = -4.04938
+anchor_right = 2.29514
+anchor_bottom = 2.71451
+grow_horizontal = 2
+grow_vertical = 2
+metadata/_edit_use_anchors_ = true
+
+[node name="MarginContainer" type="MarginContainer" parent="."]
+process_mode = 2
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.438368
+anchor_top = 0.411265
+anchor_right = 0.561632
+anchor_bottom = 0.588735
+grow_horizontal = 2
+grow_vertical = 2
+metadata/_edit_use_anchors_ = true
+
+[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer"]
+layout_mode = 2
+
+[node name="Resume" type="Button" parent="MarginContainer/VBoxContainer"]
+layout_mode = 2
+text = "Resume"
+
+[node name="Restart" type="Button" parent="MarginContainer/VBoxContainer"]
+layout_mode = 2
+text = "Restart"
+
+[node name="Back" type="Button" parent="MarginContainer/VBoxContainer"]
+layout_mode = 2
+text = "Back"

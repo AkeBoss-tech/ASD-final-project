@@ -11,8 +11,7 @@ var cars_data = {}
 
 # Array of car objects
 @onready var car_objects = [
-	player,
-	$raceFuture
+	player
 ]
 
 var path_global_transform
@@ -48,7 +47,7 @@ func _ready():
 # Function to update the HUD for a specific car
 func _on_car_speed_changed(speed, car):
 	car.get_node("HUD/speed").text = "Speed: " + str(round(speed)) + " units/sec"
-	
+
 func pauseMenu():
 	if not get_tree().paused:
 		pause.hide()
@@ -72,6 +71,7 @@ func _process(delta):
 		player.global_transform.basis = checkpoints[cars_data[player]["current_checkpoint_index"] - 1].global_transform.basis
 		player.linear_velocity = Vector3.ZERO
 		player.angular_velocity = Vector3.ZERO
+	
 	
 	for car in car_objects:
 		var car_position = car.global_transform.origin
@@ -218,8 +218,12 @@ func update_rankings():
 	for i in range(car_objects.size()):
 		var car = car_objects[i]
 		if car == player:
-			var end = "th" if i > 3 else ["st", "nd", "rd"][i]
+			var end = "th" if i >= 3 else ["st", "nd", "rd"][i]
 			car.get_node("HUD/rank").text = str(i + 1) + end
+			
+			
+func progress_on_track(car):
+	return cars_data[car]["progress_percent"]/100 + cars_data[car]["lap"] 
 
 # Custom comparison function to sort cars by lap and progress percentage
 func compare_cars(a, b):
