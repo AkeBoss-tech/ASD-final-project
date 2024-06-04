@@ -1,9 +1,9 @@
 extends VehicleBody3D
 
 @export var max_steer = 0.7
-const ENGINE_POWER = 100000
-const BRAKE_POWER = 30000
-const REVERSE_SPEED = -35000
+@export var ENGINE_POWER = 100000
+@export var  BRAKE_POWER = 30000
+@export var REVERSE_SPEED = -35000
 
 signal speed_changed(speed)
 

@@ -6,17 +6,17 @@ var cars_data = {}
 # Path to the race track (Path3D node)
 @onready var path = $Path3D
 
-@onready var player = $race2
+@onready var player = $player
 @onready var pause = $PauseMenu
 
 # Array of car objects
 @onready var car_objects = [
 	player,
-	$raceFuture,
-	$police,
+	$blue_racecar,
+	$police_car,
 	$sedan,
-	$sedanSports,
-	$race
+	$sporty_sedan,
+	$racecar
 ]
 
 var path_global_transform
@@ -31,6 +31,9 @@ var checkpoints = []
 # Threshold progress percentage to reduce speed
 @export var progress_threshold = 0.15
 @export var reduced_speed_factor = 0.7
+@export var laps = 3
+
+var done_timer = 0
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
@@ -47,7 +50,9 @@ func _ready():
 			"lap": 0,
 			"progress_percent": 0.0,
 			"previous_progress_percent": 0.0,
+			"player": car == player
 		}
+		print(car.name)
 		car.connect("speed_changed", _on_car_speed_changed)
 	
 	generate_checkpoints()
@@ -96,7 +101,7 @@ func _process(delta):
 		cars_data[car]["progress_percent"] = progress_percent
 		
 		if car == player:
-			car.get_node("HUD/time").text = "TIME: " + str(cars_data[car]["time"]).pad_zeros(3).left(6) + "\nPROGRESS: " + str(round(progress_percent)) + "%\nLAP: " + str(cars_data[car]["lap"] + 1) + " / 3"
+			car.get_node("HUD/time").text = "TIME: " + str(cars_data[car]["time"]).pad_zeros(3).left(6) + "\nPROGRESS: " + str(round(progress_percent)) + "%\nLAP: " + str(cars_data[car]["lap"] + 1) + " / " + str(laps)
 			car.get_node("HUD/speed").text = "Best Time: " + str(cars_data[car]["best_time"]).pad_zeros(3).left(6) + "\nSpeed: " + str(round(car.linear_velocity.length()))
 			
 			# Checkpoint arrow point code
@@ -120,9 +125,44 @@ func _process(delta):
 				car.get_node("HUD/NO").visible = true
 			else:
 				car.get_node("HUD/NO").visible = false
+			
+			car.get_node("HUD/leaderboard").text = get_leaderboard()
 
 	# Update rankings based on current progress and laps
 	update_rankings()
+	check_if_done(delta)
+
+func get_leaderboard():
+	var text = ""
+	
+	# Create a sorted list of cars based on laps and progress percentage
+	car_objects.sort_custom(compare_cars)
+
+	# Update HUD with rankings
+	for i in range(car_objects.size()):
+		var car = car_objects[i]
+		var end = "th" if i >= 3 else ["st", "nd", "rd"][i]
+		
+		text += str(i + 1) + end + ". " + car.name.replace("_", " ") + "     \t" + str(round(cars_data[car]["progress_percent"])) +"%\n"
+	
+	return text
+
+func check_if_done(delta):
+	if done_timer > 0:
+		done_timer += delta
+	elif progress_on_track(player) > laps:
+		done_timer += 1
+	
+	if done_timer > 2:
+		# move on to results scene
+		$Results.set_lap_times(cars_data)
+		$Results.show()
+		get_tree().paused = true
+		pause.show()
+		player.get_node("HUD").hide()
+	
+func _handle_level_changed():
+	pass
 
 # Function to get car progress percentage
 func get_car_progress_percent(target_position_local):
