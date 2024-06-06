@@ -50,6 +50,7 @@ func _ready():
 			"lap": 0,
 			"progress_percent": 0.0,
 			"previous_progress_percent": 0.0,
+			"laps": [],
 			"player": car == player
 		}
 		print(car.name)
@@ -155,7 +156,7 @@ func check_if_done(delta):
 	
 	if done_timer > 2:
 		# move on to results scene
-		$Results.set_lap_times(cars_data)
+		$Results.set_lap_times(car_objects, cars_data)
 		$Results.show()
 		get_tree().paused = true
 		pause.show()
@@ -249,6 +250,7 @@ func start(car):
 	
 	print("Car crossed the start/finish line!")
 	# Update lap time and check if it's the best time
+	car_data["laps"].append(car_data["time"])
 	if car_data["time"] < car_data["best_time"]:
 		car_data["best_time"] = car_data["time"]
 	print("Current lap time: ", car_data["time"])

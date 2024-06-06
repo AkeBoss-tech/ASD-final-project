@@ -345,6 +345,8 @@ transform = Transform3D(23, 0, 0, 0, 23, 0, 0, 0, 23, 62.8681, 0, -127.108)
 visible = false
 
 [node name="PauseMenu" parent="." instance=ExtResource("12_4svxx")]
+offset_left = 1.0
+offset_right = 1.0
 
 [node name="police_car" parent="." node_paths=PackedStringArray("path_follow") instance=ExtResource("14_i4mu8")]
 transform = Transform3D(-0.0977913, 0, 0.995207, 0, 1, 0, -0.995207, 0, -0.0977913, 10.8312, 0, 17.8892)

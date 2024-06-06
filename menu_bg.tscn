@@ -177,7 +177,7 @@ transform = Transform3D(23, 0, 0, 0, 23, 0, 0, 0, 23, 62.8681, 0, -127.108)
 transform = Transform3D(8, 0, 0, 0, 2, 0, 0, 0, 8, 0, -0.0841339, 0)
 
 [node name="race" parent="." node_paths=PackedStringArray("path_follow") instance=ExtResource("14_xxpi7")]
-transform = Transform3D(-0.208407, 0, 0.978042, 0, 1, 0, -0.978042, 0, -0.208407, 0, 0, 14.5691)
+transform = Transform3D(-0.017592, 0, 0.999845, 0, 1, 0, -0.999845, 0, -0.017592, -2.31791, 0, 12.3849)
 script = ExtResource("14_r2av4")
 path_follow = NodePath("../RacingLine/PathFollow3D")
 max_speed = 1000.0
