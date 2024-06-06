@@ -285,6 +285,17 @@ func update_rankings():
 		else:
 			continue
 			
+	# check to see if they have fallen through the map
+	for i in range(car_objects.size()):
+		var car = car_objects[i]
+		
+		if car.global_transform.origin.y < -10:
+			# respawn the car
+			car.global_transform.origin = checkpoints[cars_data[car]["current_checkpoint_index"] - 1].global_transform.origin
+			car.global_transform.basis = checkpoints[cars_data[car]["current_checkpoint_index"] - 1].global_transform.basis
+			car.linear_velocity = Vector3.ZERO
+			car.angular_velocity = Vector3.ZERO
+			
 			
 func progress_on_track(car):
 	return cars_data[car]["progress_percent"]/100 + cars_data[car]["lap"] 
