@@ -10,6 +10,42 @@ func sum(numbers):
 	return total
 
 # Method to set lap times
+func set_times(car_data):
+	data = car_data
+	
+	$UserResults.text = get_times()
+	$TimeResults.text = get_sorted_times()
+	$Place.text = get_fastest()
+	# Update the UI or perform other actions with lap times
+	print(get_leaderboard())
+	print(get_user_place())
+
+func get_times():
+	var text = "Lap Times\n----------\n"
+
+	for lap in data["laps"]:
+		text += str(lap).pad_zeros(3).left(6) + "\n"
+	
+	return text
+
+func get_sorted_times():
+	var text = "Sorted Lap Times\n----------\n"
+	
+	if data["laps"].size() == 0:
+		return text
+	
+	data["laps"].sort()
+	
+	for lap in data["laps"]:
+		text += str(lap).pad_zeros(3).left(6) + "\n"
+	
+	return text
+
+func get_fastest():
+	var fastest = data["best_time"]
+	return str(fastest).pad_zeros(3).left(6)
+
+# Method to set lap times
 func set_lap_times(car_objects, car_data):
 	data = car_data
 	objects = car_objects

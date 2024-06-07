@@ -10,11 +10,12 @@ config_version=5
 
 [application]
 
-config/name="CSA-final-project"
+config/name="Kenny's Racing Game"
+config/description="a racing game for certs"
 run/main_scene="res://menu_bg.tscn"
 config/features=PackedStringArray("4.2", "Forward Plus")
 run/max_fps=60
-config/icon="res://icon.svg"
+config/icon="res://assets/logo.png"
 
 [autoload]
 

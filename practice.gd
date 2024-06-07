@@ -22,7 +22,6 @@ var checkpoints = []
 # Number of checkpoints to generate
 @export var num_checkpoints = 15
 @export var distance_checkpoint_arrow = 80
-@export var laps = 3
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
@@ -38,8 +37,9 @@ func _ready():
 			"current_checkpoint_index": 0,
 			"lap": 0,
 			"progress_percent": 0.0,
-			"previous_progress_percent": 0.0,
-			"lap_times": [],  # Store lap times
+			"previous_progress_percent": 0,
+			"laps": [],
+			"player": true
 		}
 		car.connect("speed_changed", _on_car_speed_changed)
 	
@@ -53,8 +53,13 @@ func _on_car_speed_changed(speed, car):
 func pauseMenu():
 	if not get_tree().paused:
 		pause.hide()
+		$Results.hide()
 		player.get_node("HUD").show()
 	else:
+		# move on to results scene
+		$Results.set_times(cars_data[player])
+		$Results.show()
+		get_tree().paused = true
 		pause.show()
 		player.get_node("HUD").hide()
 
@@ -89,7 +94,7 @@ func _process(delta):
 		cars_data[car]["progress_percent"] = progress_percent
 		
 		if car == player:
-			car.get_node("HUD/time").text = "TIME: " + str(cars_data[car]["time"]).pad_zeros(3).left(6) + "\nPROGRESS: " + str(round(progress_percent)) + "%\nLAP: " + str(cars_data[car]["lap"] + 1) + " / " + str(laps)
+			car.get_node("HUD/time").text = "TIME: " + str(cars_data[car]["time"]).pad_zeros(3).left(6) + "\nPROGRESS: " + str(round(progress_percent)) + "%\nLAP: " + str(cars_data[car]["lap"] + 1) 
 			car.get_node("HUD/speed").text = "Best Time: " + str(cars_data[car]["best_time"]).pad_zeros(3).left(6) + "\nSpeed: " + str(round(car.linear_velocity.length()))
 			
 			# Checkpoint arrow point code
@@ -113,9 +118,27 @@ func _process(delta):
 				car.get_node("HUD/NO").visible = true
 			else:
 				car.get_node("HUD/NO").visible = false
+		
+			car.get_node("HUD/leaderboard").text = get_leaderboard()
 
 	# Update rankings based on current progress and laps
 	update_rankings()
+
+func get_leaderboard():
+	var text = "Sorted Lap Times\n----------\n"
+	
+	if cars_data[player]["laps"].size() == 0:
+		return text
+	
+	cars_data[player]["laps"].sort()
+	
+	for lap in cars_data[player]["laps"]:
+		text += str(lap).pad_zeros(3).left(6) + "\n"
+	
+	return text
+
+func progress_on_track(car):
+	return cars_data[car]["progress_percent"]/100 + cars_data[car]["lap"] 
 
 # Function to get car progress percentage
 func get_car_progress_percent(target_position_local):
@@ -202,22 +225,19 @@ func start(car):
 	
 	print("Car crossed the start/finish line!")
 	# Update lap time and check if it's the best time
+	car_data["laps"].append(car_data["time"])
 	if car_data["time"] < car_data["best_time"]:
 		car_data["best_time"] = car_data["time"]
 	print("Current lap time: ", car_data["time"])
 	print("Best lap time: ", car_data["best_time"])
 	
 	# Store the lap time
-	car_data["lap_times"].append(car_data["time"])
+	car_data["laps"].append(car_data["time"])
 	
 	# Reset the lap timer
 	car_data["time"] = 0
 	# Increment the lap counter
 	car_data["lap"] += 1
-	
-	# Check if race is over (assuming 3 laps)
-	if car_data["lap"] >= laps:
-		race_over()
 
 # Function to update the rankings based on laps and progress percentage
 func update_rankings():
@@ -230,9 +250,17 @@ func update_rankings():
 		if car == player:
 			var end = "th" if i >= 3 else ["st", "nd", "rd"][i]
 			car.get_node("HUD/rank").text = str(i + 1) + end
-
-func progress_on_track(car):
-	return cars_data[car]["progress_percent"]/100 + cars_data[car]["lap"] 
+	
+	# check to see if they have fallen through the map
+	for i in range(car_objects.size()):
+		var car = car_objects[i]
+		
+		if car.global_transform.origin.y < -10:
+			# respawn the car
+			car.global_transform.origin = checkpoints[cars_data[car]["current_checkpoint_index"] - 1].global_transform.origin
+			car.global_transform.basis = checkpoints[cars_data[car]["current_checkpoint_index"] - 1].global_transform.basis
+			car.linear_velocity = Vector3.ZERO
+			car.angular_velocity = Vector3.ZERO
 
 # Custom comparison function to sort cars by lap and progress percentage
 func compare_cars(a, b):
@@ -253,10 +281,3 @@ func compare_cars(a, b):
 		
 	# If laps are equal, compare by progress percentage
 	return a_data["progress_percent"] > b_data["progress_percent"]
-
-# Function to handle the end of the race
-func race_over():
-	# Transfer lap times to the results scene
-	var results_scene = load("res://results.tscn").instance()
-	results_scene.set_lap_times(cars_data)
-	get_tree().change_scene_to(results_scene)

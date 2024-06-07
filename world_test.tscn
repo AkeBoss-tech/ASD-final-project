@@ -1,4 +1,4 @@
-[gd_scene load_steps=23 format=3 uid="uid://ctcavvwu05qm7"]
+[gd_scene load_steps=24 format=3 uid="uid://ctcavvwu05qm7"]
 
 [ext_resource type="Script" path="res://world_test.gd" id="1_gljak"]
 [ext_resource type="PackedScene" uid="uid://ijwvc0wfeehw" path="res://track_2.tscn" id="2_5fokm"]
@@ -52,6 +52,10 @@ font_size = 24
 outline_size = 4
 outline_color = Color(0, 0, 0, 1)
 
+[sub_resource type="LabelSettings" id="LabelSettings_pu8qa"]
+outline_size = 2
+outline_color = Color(0.0728426, 0.0728426, 0.0728426, 1)
+
 [sub_resource type="Curve3D" id="Curve3D_in085"]
 _data = {
 "points": PackedVector3Array(0, 0, 0, 0, 0, 0, -17.4139, 0, 14.7771, 0, 0, 0, 0, 0, 0, -108.366, 0, 11.4534, 0, 0, 0, 0, 0, 0, -125.141, 0, 11.7557, 0, 0, 0, 0, 0, 0, -156.717, 0, 11.7523, 0, 0, 0, 0, 0, 0, -170.887, 0, 6.47347, 0, 0, 0, 0, 0, 0, -178.249, 0, -6.58473, 0, 0, 0, 0, 0, 0, -175.471, 0, -22.838, 0, 0, 0, 0, 0, 0, -165.608, 0, -33.1179, 0, 0, 0, 0, 0, 0, -154.457, 0, -36.1945, 0, 0, 0, 0, 0, 0, -139.454, 0, -36.4723, 0, 0, 0, 0, 0, 0, -122.089, 0, -36.6112, 0, 0, 0, 0, 0, 0, -98.8901, 0, -36.6112, 0, 0, 0, 0, 0, 0, -80.4141, 0, -36.1945, 0, 0, 0, 0, 0, 0, -57.9095, 0, -36.1945, 0, 0, 0, 0, 0, 0, -39.2946, 0, -37.028, 0, 0, 0, 0, 0, 0, -25.4029, 0, -43.5571, 0, 0, 0, 0, 0, 0, -18.1386, 0, -56.9681, 0, 0, 0, 0, 0, 0, -22.3061, 0, -73.0825, 0, 0, 0, 0, 0, 0, -38.1426, 0, -83.918, 0, 0, 0, 0, 0, 0, -63.9812, 0, -84.4737, 0, 0, 0, 0, 0, 0, -86.3469, 0, -84.3348, 0, 0, 0, 0, 0, 0, -106.629, 0, -83.918, 0, 0, 0, 0, 0, 0, -126.494, 0, -84.1959, 0, 0, 0, 0, 0, 0, -144.831, 0, -84.4737, 0, 0, 0, 0, 0, 0, -162.929, 0, -84.8712, 0, 0, 0, 0, 0, 0, -173.626, 0, -91.9559, 0, 0, 0, 0, 0, 0, -178.071, 0, -100.708, 0, 0, 0, 0, 0, 0, -178.349, 0, -114.738, 0, 0, 0, 0, 0, 0, -177.932, 0, -127.102, 0, 0, 0, 0, 0, 0, -178.071, 0, -143.911, 0, 0, 0, 0, 0, 0, -178.415, 0, -158.182, 0, 0, 0, 0, 0, 0, -178.137, 0, -172.213, 0, 0, 0, 0, 0, 0, -171.886, 0, -180.964, 0, 0, 0, 0, 0, 0, -159.661, 0, -187.494, 0, 0, 0, 0, 0, 0, -134.101, 0, -181.242, 0, 0, 0, 0, 0, 0, -130.489, 0, -171.101, 0, 0, 0, 0, 0, 0, -131.322, 0, -148.736, 0, 0, 0, 0, 0, 0, -130.767, 0, -128.732, 0, 0, 0, 0, 0, 0, -123.814, 0, -118.71, 0, 0, 0, 0, 0, 0, -113.395, 0, -115.792, 0, 0, 0, 0, 0, 0, -98.5306, 0, -115.653, 0, 0, 0, 0, 0, 0, -79.6379, 0, -115.931, 0, 0, 0, 0, 0, 0, -63.9403, 0, -115.931, 0, 0, 0, 0, 0, 0, -54.2161, 0, -116.487, 0, 0, 0, 0, 0, 0, -44.0751, 0, -121.627, 0, 0, 0, 0, 0, 0, -36.5736, 0, -132.046, 0, 0, 0, 0, 0, 0, -34.4899, 0, -141.631, 0, 0, 0, 0, 0, 0, -36.8514, 0, -149.41, 0, 0, 0, 0, 0, 0, -42.9638, 0, -154.272, 0, 0, 0, 0, 0, 0, -54.355, 0, -157.467, 0, 0, 0, 0, 0, 0, -64.2181, 0, -163.58, 0, 0, 0, 0, 0, 0, -65.7462, 0, -173.721, 0, 0, 0, 0, 0, 0, -63.4945, 0, -183.208, 0, 0, 0, 0, 0, 0, -55.8541, 0, -186.681, 0, 0, 0, 0, 0, 0, -45.0185, 0, -187.932, 0, 0, 0, 0, 0, 0, -35.2943, 0, -188.209, 0, 0, 0, 0, 0, 0, -25.1534, 0, -188.626, 0, 0, 0, 0, 0, 0, -11.2617, 0, -188.487, 0, 0, 0, 0, 0, 0, 4.8527, 0, -188.209, 0, 0, 0, 0, 0, 0, 15.6882, 0, -185.431, 0, 0, 0, 0, 0, 0, 23.1897, 0, -180.43, 0, 0, 0, 0, 0, 0, 28.8853, 0, -170.845, 0, 0, 0, 0, 0, 0, 28.7464, 0, -156.397, 0, 0, 0, 0, 0, 0, 28.8853, 0, -130.976, 0, 0, 0, 0, 0, 0, 28.3297, 0, -112.083, 0, 0, 0, 0, 0, 0, 29.1806, 0, -87.4437, 0, 0, 0, 0, 0, 0, 28.6249, 0, -66.1894, 0, 0, 0, 0, 0, 0, 28.8938, 0, -39.6458, 0, 0, 0, 0, 0, 0, 36.1175, 0, -23.2536, 0, 0, 0, 0, 0, 0, 41.8131, 0, -20.0585, 0, 0, 0, 0, 0, 0, 55.8437, 0, -20.3364, 0, 0, 0, 0, 0, 0, 66.5403, 0, -21.1699, 0, 0, 0, 0, 0, 0, 73.4862, 0, -27.0044, 0, 0, 0, 0, 0, 0, 76.6813, 0, -33.5335, 0, 0, 0, 0, 0, 0, 77.3759, 0, -51.1759, 0, 0, 0, 0, 0, 0, 76.9591, 0, -72.847, 0, 0, 0, 0, 0, 0, 77.221, 0, -101.123, 0, 0, 0, 0, 0, 0, 77.4988, 0, -127.517, 0, 0, 0, 0, 0, 0, 77.4427, 0, -147.267, 0, 0, 0, 0, 0, 0, 78.554, 0, -163.52, 0, 0, 0, 0, 0, 0, 86.8891, 0, -175.05, 0, 0, 0, 0, 0, 0, 96.7522, 0, -180.329, 0, 0, 0, 0, 0, 0, 117.173, 0, -180.468, 0, 0, 0, 0, 0, 0, 127.87, 0, -176.995, 0, 0, 0, 0, 0, 0, 136.899, 0, -167.826, 0, 0, 0, 0, 0, 0, 140.65, 0, -158.797, 0, 0, 0, 0, 0, 0, 141.067, 0, -143.377, 0, 0, 0, 0, 0, 0, 140.966, 0, -127.524, 0, 0, 0, 0, 0, 0, 141.521, 0, -107.937, 0, 0, 0, 0, 0, 0, 141.382, 0, -84.3211, 0, 0, 0, 0, 0, 0, 141.124, 0, -32.098, 0, 0, 0, 0, 0, 0, 140.522, 0, -7.55999, 0, 0, 0, 0, 0, 0, 137.883, 0, 0.913952, 0, 0, 0, 0, 0, 0, 132.187, 0, 7.0263, 0, 0, 0, 0, 0, 0, 124.546, 0, 10.4992, 0, 0, 0, 0, 0, 0, 113.711, 0, 11.0549, 0, 0, 0, 0, 0, 0, 96.7465, 0, 10.9951, 0, 0, 0, 0, 0, 0, 64.9345, 0, 11.273, 0, 0, 0, 0, 0, 0, 38.5403, 0, 10.9951, 0, 0, 0, 0, 0, 0, 13.5352, 0, 11.134, 0, 0, 0, 0, 0, 0, -6.86214, 0, 11.7624),
@@ -68,6 +72,7 @@ point_count = 37
 
 [node name="world_test" type="Node3D"]
 script = ExtResource("1_gljak")
+laps = 1
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
 environment = SubResource("Environment_yx4xc")
@@ -100,13 +105,13 @@ transform = Transform3D(1, 0, 0, 0, 0.290635, 0.956834, 0, -0.956834, 0.290635, 
 [node name="DirectionalLight3D3" type="DirectionalLight3D" parent="DirectionalLight3D3"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -26.6392, 7.57815, 11.1715)
 
-[node name="race2" parent="." instance=ExtResource("3_sgwct")]
+[node name="player" parent="." instance=ExtResource("3_sgwct")]
 transform = Transform3D(0.00776664, 0, 0.99997, 0, 1, 0, -0.99997, 0, 0.00776664, -3.4546, 0.142611, 9.04996)
 
-[node name="HUD" type="CanvasLayer" parent="race2"]
+[node name="HUD" type="CanvasLayer" parent="player"]
 follow_viewport_enabled = true
 
-[node name="time" type="Label" parent="race2/HUD"]
+[node name="time" type="Label" parent="player/HUD"]
 anchors_preset = -1
 anchor_left = 0.846354
 anchor_right = 1.0
@@ -121,7 +126,7 @@ text = "Time: "
 label_settings = SubResource("LabelSettings_avw6r")
 metadata/_edit_use_anchors_ = true
 
-[node name="rank" type="Label" parent="race2/HUD"]
+[node name="rank" type="Label" parent="player/HUD"]
 anchors_preset = -1
 anchor_right = 0.228299
 anchor_bottom = 0.155864
@@ -135,7 +140,7 @@ text = "Speed: "
 label_settings = SubResource("LabelSettings_mqg0q")
 metadata/_edit_use_anchors_ = true
 
-[node name="speed" type="Label" parent="race2/HUD"]
+[node name="speed" type="Label" parent="player/HUD"]
 anchors_preset = 3
 anchor_left = 1.0
 anchor_top = 1.0
@@ -154,7 +159,7 @@ Speed: "
 label_settings = SubResource("LabelSettings_ssqck")
 metadata/_edit_use_anchors_ = true
 
-[node name="SubViewportContainer" type="SubViewportContainer" parent="race2/HUD"]
+[node name="SubViewportContainer" type="SubViewportContainer" parent="player/HUD"]
 anchors_preset = -1
 anchor_top = 0.671296
 anchor_right = 0.15191
@@ -167,12 +172,12 @@ grow_vertical = 0
 stretch = true
 metadata/_edit_use_anchors_ = true
 
-[node name="SubViewport" type="SubViewport" parent="race2/HUD/SubViewportContainer"]
+[node name="SubViewport" type="SubViewport" parent="player/HUD/SubViewportContainer"]
 handle_input_locally = false
 size = Vector2i(175, 213)
 render_target_update_mode = 4
 
-[node name="MiniMap" type="Camera3D" parent="race2/HUD/SubViewportContainer/SubViewport"]
+[node name="MiniMap" type="Camera3D" parent="player/HUD/SubViewportContainer/SubViewport"]
 transform = Transform3D(-4.37114e-08, -1, -4.37114e-08, 0, -4.37114e-08, 1, -1, 4.37114e-08, 1.91069e-15, -5.97361, 5.96288, 13.2583)
 projection = 1
 size = 60.0
@@ -181,16 +186,32 @@ script = ExtResource("4_113li")
 target = NodePath("../../../..")
 distance = -55
 
-[node name="CheckpointArrow" type="Sprite2D" parent="race2/HUD"]
+[node name="CheckpointArrow" type="Sprite2D" parent="player/HUD"]
 position = Vector2(570, 114)
 rotation = 0.506145
 scale = Vector2(0.1, 0.1)
 texture = ExtResource("5_5cet1")
 
-[node name="NO" type="Sprite2D" parent="race2/HUD"]
+[node name="NO" type="Sprite2D" parent="player/HUD"]
 position = Vector2(568, 522)
 scale = Vector2(0.1, 0.1)
 texture = ExtResource("6_wjtbu")
+
+[node name="leaderboard" type="Label" parent="player/HUD"]
+anchors_preset = 4
+anchor_top = 0.5
+anchor_bottom = 0.5
+offset_left = 20.0
+offset_top = -137.0
+offset_right = 244.0
+offset_bottom = 44.0
+grow_vertical = 2
+size_flags_horizontal = 2
+size_flags_vertical = 2
+text = "Hey brp
+"
+label_settings = SubResource("LabelSettings_pu8qa")
+uppercase = true
 
 [node name="Timer" type="Timer" parent="."]
 
