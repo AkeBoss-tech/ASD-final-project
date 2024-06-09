@@ -1,7 +1,8 @@
-[gd_scene load_steps=15 format=3 uid="uid://cx4oc67e351vo"]
+[gd_scene load_steps=16 format=3 uid="uid://cx4oc67e351vo"]
 
 [ext_resource type="Script" path="res://player.gd" id="1_aydre"]
-[ext_resource type="AudioStream" uid="uid://cakohl240jfkd" path="res://assets/sounds/engine.mp3" id="2_je4f2"]
+[ext_resource type="AudioStream" uid="uid://cxsjnvv7aewsw" path="res://assets/sounds/On.wav" id="2_vf7jl"]
+[ext_resource type="AudioStream" uid="uid://um3wi8sfv20a" path="res://assets/sounds/Off.wav" id="3_i7fy8"]
 
 [sub_resource type="PhysicsMaterial" id="PhysicsMaterial_x371t"]
 
@@ -218,6 +219,7 @@ gravity_scale = 2.0
 center_of_mass_mode = 1
 center_of_mass = Vector3(0, 0, -0.2)
 script = ExtResource("1_aydre")
+acceleration_threshold = 0.05
 
 [node name="FrontRight" type="VehicleWheel3D" parent="."]
 transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 0.35, 0.3, -0.639886)
@@ -310,5 +312,15 @@ fov = 67.5
 [node name="ReverseCamera" type="Camera3D" parent="CameraPivot"]
 transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 0, 1, -0.5)
 
-[node name="Audio" type="AudioStreamPlayer3D" parent="."]
-stream = ExtResource("2_je4f2")
+[node name="On" type="AudioStreamPlayer3D" parent="."]
+stream = ExtResource("2_vf7jl")
+volume_db = 6.0
+max_db = 6.0
+autoplay = true
+bus = &"Engine Noises"
+
+[node name="Off" type="AudioStreamPlayer3D" parent="."]
+stream = ExtResource("3_i7fy8")
+volume_db = 6.0
+max_db = 6.0
+bus = &"Engine Noises"
