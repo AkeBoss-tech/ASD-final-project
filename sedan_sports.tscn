@@ -1,6 +1,8 @@
-[gd_scene load_steps=17 format=3 uid="uid://cgk847bk54co1"]
+[gd_scene load_steps=19 format=3 uid="uid://cgk847bk54co1"]
 
 [ext_resource type="Script" path="res://sedan_sports.gd" id="1_k5ajc"]
+[ext_resource type="AudioStream" uid="uid://cxsjnvv7aewsw" path="res://assets/sounds/On.wav" id="2_dvnk1"]
+[ext_resource type="AudioStream" uid="uid://um3wi8sfv20a" path="res://assets/sounds/Off.wav" id="3_ub0ok"]
 
 [sub_resource type="PhysicsMaterial" id="PhysicsMaterial_6i4b4"]
 
@@ -394,3 +396,14 @@ transform = Transform3D(1, 0, -8.74228e-08, 0, 1, 0, -8.74228e-08, 0, -1, 0, 0, 
 gi_mode = 0
 mesh = SubResource("ArrayMesh_hlo3a")
 skeleton = NodePath("")
+
+[node name="On" type="AudioStreamPlayer3D" parent="."]
+stream = ExtResource("2_dvnk1")
+volume_db = 6.0
+max_db = 6.0
+autoplay = true
+
+[node name="Off" type="AudioStreamPlayer3D" parent="."]
+stream = ExtResource("3_ub0ok")
+volume_db = 6.0
+max_db = 6.0

@@ -1,6 +1,8 @@
-[gd_scene load_steps=24 format=3 uid="uid://dhdqdgak0f1tj"]
+[gd_scene load_steps=26 format=3 uid="uid://dhdqdgak0f1tj"]
 
 [ext_resource type="Script" path="res://nissangtr.gd" id="1_6tfp3"]
+[ext_resource type="AudioStream" uid="uid://cxsjnvv7aewsw" path="res://assets/sounds/On.wav" id="2_oa88p"]
+[ext_resource type="AudioStream" uid="uid://um3wi8sfv20a" path="res://assets/sounds/Off.wav" id="3_urfjp"]
 
 [sub_resource type="PhysicsMaterial" id="PhysicsMaterial_4y6ak"]
 
@@ -543,3 +545,14 @@ suspension_stiffness = 200.0
 [node name="Circle" type="MeshInstance3D" parent="Front_Left"]
 mesh = SubResource("ArrayMesh_dj53j")
 skeleton = NodePath("")
+
+[node name="On" type="AudioStreamPlayer3D" parent="."]
+stream = ExtResource("2_oa88p")
+volume_db = 6.0
+max_db = 6.0
+autoplay = true
+
+[node name="Off" type="AudioStreamPlayer3D" parent="."]
+stream = ExtResource("3_urfjp")
+volume_db = 6.0
+max_db = 6.0

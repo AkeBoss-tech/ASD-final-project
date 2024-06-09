@@ -1,6 +1,8 @@
-[gd_scene load_steps=14 format=3 uid="uid://rnh8ygv4e888"]
+[gd_scene load_steps=16 format=3 uid="uid://rnh8ygv4e888"]
 
 [ext_resource type="Script" path="res://raceFuture.gd" id="1_eo8sg"]
+[ext_resource type="AudioStream" uid="uid://cxsjnvv7aewsw" path="res://assets/sounds/On.wav" id="2_4mav6"]
+[ext_resource type="AudioStream" uid="uid://um3wi8sfv20a" path="res://assets/sounds/Off.wav" id="3_kovo0"]
 
 [sub_resource type="PhysicsMaterial" id="PhysicsMaterial_ojyo5"]
 
@@ -308,3 +310,14 @@ transform = Transform3D(1, 0, 2.13163e-14, 0, 1, 0, -2.13163e-14, 0, 1, -0.13188
 gi_mode = 0
 mesh = SubResource("ArrayMesh_vdpfo")
 skeleton = NodePath("")
+
+[node name="On" type="AudioStreamPlayer3D" parent="."]
+stream = ExtResource("2_4mav6")
+volume_db = 6.0
+max_db = 6.0
+autoplay = true
+
+[node name="Off" type="AudioStreamPlayer3D" parent="."]
+stream = ExtResource("3_kovo0")
+volume_db = 6.0
+max_db = 6.0

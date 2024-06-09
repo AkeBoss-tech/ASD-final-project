@@ -72,7 +72,6 @@ point_count = 37
 
 [node name="world_test" type="Node3D"]
 script = ExtResource("1_gljak")
-laps = 1
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
 environment = SubResource("Environment_yx4xc")
@@ -234,6 +233,8 @@ steering_angle = 0.0
 johnson_carrot = 15
 steer_slow_threshold = 0.1
 racing_line_path = NodePath("../RacingLine")
+accel_pitch_multi = 50
+decel_pitch_multi = 20
 
 [node name="RandomAssets" type="Node3D" parent="."]
 

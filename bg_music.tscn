@@ -4,5 +4,5 @@
 
 [node name="AudioStreamPlayer" type="AudioStreamPlayer"]
 stream = ExtResource("1_5vig3")
-volume_db = -29.1
+volume_db = -30.333
 autoplay = true

@@ -252,6 +252,8 @@ steering_angle = 0.0
 johnson_carrot = 15
 steer_slow_threshold = 0.1
 racing_line_path = NodePath("../RacingLine")
+accel_pitch_multi = 50
+decel_pitch_multi = 20
 
 [node name="RandomAssets" type="Node3D" parent="."]
 
@@ -357,6 +359,8 @@ steering_angle = 0.0
 johnson_carrot = 15
 steer_slow_threshold = 0.1
 racing_line_path = NodePath("../RacingLine")
+accel_pitch_multi = 50
+decel_pitch_multi = 20
 
 [node name="sedan" parent="." node_paths=PackedStringArray("path_follow") instance=ExtResource("16_1u3jb")]
 transform = Transform3D(-0.054532, 0, 0.998512, 0, 1, 0, -0.998512, 0, -0.054532, 4.7253, 0, 17.7675)
@@ -377,6 +381,8 @@ steering_angle = 0.0
 johnson_carrot = 15
 steer_slow_threshold = 0.1
 racing_line_path = NodePath("../RacingLine2")
+accel_pitch_multi = 50
+decel_pitch_multi = 20
 
 [node name="racecar" parent="." node_paths=PackedStringArray("path_follow") instance=ExtResource("3_sgwct")]
 transform = Transform3D(0.083504, 0, 0.996507, 0, 1, 0, -0.996507, 0, 0.083504, 5.47849, 0, 12.5329)

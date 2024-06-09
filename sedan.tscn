@@ -1,8 +1,9 @@
-[gd_scene load_steps=19 format=3 uid="uid://gyliv8ufctt7"]
+[gd_scene load_steps=20 format=3 uid="uid://gyliv8ufctt7"]
 
 [ext_resource type="Script" path="res://player.gd" id="1_gft4c"]
 [ext_resource type="AudioStream" uid="uid://lsxioodledw7" path="res://assets/sounds/engine2.mp3" id="2_omcoy"]
-[ext_resource type="AudioStream" uid="uid://ch0pmti2rf1sv" path="res://assets/sounds/crash.mp3" id="3_6yucl"]
+[ext_resource type="AudioStream" uid="uid://cxsjnvv7aewsw" path="res://assets/sounds/On.wav" id="3_ce6kr"]
+[ext_resource type="AudioStream" uid="uid://um3wi8sfv20a" path="res://assets/sounds/Off.wav" id="4_wupvc"]
 
 [sub_resource type="PhysicsMaterial" id="PhysicsMaterial_cu8x7"]
 
@@ -375,8 +376,15 @@ skeleton = NodePath("")
 stream = ExtResource("2_omcoy")
 autoplay = true
 
-[node name="Crash" type="AudioStreamPlayer3D" parent="."]
-stream = ExtResource("3_6yucl")
+[node name="On" type="AudioStreamPlayer3D" parent="."]
+stream = ExtResource("3_ce6kr")
+volume_db = 6.0
+max_db = 6.0
+autoplay = true
+
+[node name="Off" type="AudioStreamPlayer3D" parent="."]
+stream = ExtResource("4_wupvc")
+volume_db = 6.0
+max_db = 6.0
 
 [connection signal="body_entered" from="." to="." method="_on_body_entered"]
-[connection signal="finished" from="Crash" to="." method="_on_crash_finished"]

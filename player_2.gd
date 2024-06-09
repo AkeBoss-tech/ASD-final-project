@@ -10,7 +10,14 @@ signal speed_changed(speed)
 @onready var camera_pivot = $CameraPivot
 @onready var camera_3d = $CameraPivot/Camera3D
 @onready var reverse_camera = $CameraPivot/ReverseCamera
-@onready var audio = $Audio
+
+# Reference to the AudioStreamPlayer nodes
+@onready var audio_on = $On
+@onready var audio_off = $Off
+
+# Threshold to detect acceleration change
+@export var accel_pitch_multi := 50
+@export var decel_pitch_multi := 20
 
 var look_at
 var previous_speed = 0
@@ -23,6 +30,8 @@ var previous_speed = 0
 func _ready():
 	# Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURE)
 	look_at = global_position
+	audio_on.stop()
+	audio_off.stop()
 
 func _check_camera_switch():
 	if linear_velocity.dot(transform.basis.z) < 0.01:
@@ -75,7 +84,19 @@ func _physics_process(delta):
 		rotation = Vector3(rotation.x, rotation.y, 0)"""
 		
 
-
+func _process(delta):
+	# Check if the car is accelerating or decelerating
+	if engine_force > 0:
+		if not audio_on.playing:
+			audio_off.stop()
+			audio_on.play()
+	else:
+		if not audio_off.playing:
+			audio_on.stop()
+			audio_off.play()
+			
+	audio_on.pitch_scale = linear_velocity.length() / accel_pitch_multi + 1
+	audio_off.pitch_scale = linear_velocity.length() / decel_pitch_multi + 1
 
 func _on_body_entered(body):
 	$crash.play()

@@ -17,6 +17,14 @@ var target_marker
 var timer
 @export var racing_line_path: NodePath
 
+# Reference to the AudioStreamPlayer nodes
+@onready var audio_on = $On
+@onready var audio_off = $Off
+
+# Threshold to detect acceleration change
+@export var accel_pitch_multi := 50
+@export var decel_pitch_multi := 20
+
 # Variables to track car movement
 var last_position: Vector3
 var time_since_movement = 0.0
@@ -48,6 +56,9 @@ func _ready():
 	
 	# Initialize last position
 	last_position = global_transform.origin
+	
+	audio_on.stop()
+	audio_off.stop()
 
 func _input(event):
 	pass
@@ -135,3 +146,17 @@ func _process(delta):
 	if reversing:
 		engine_force = -max_speed
 		steering = 0
+	
+	# Check if the car is accelerating or decelerating
+	if engine_force > 0:
+		if not audio_on.playing:
+			audio_off.stop()
+			audio_on.play()
+	else:
+		if not audio_off.playing:
+			audio_on.stop()
+			audio_off.play()
+			
+	audio_on.pitch_scale = linear_velocity.length() / accel_pitch_multi + 1
+	audio_off.pitch_scale = linear_velocity.length() / decel_pitch_multi + 1
+

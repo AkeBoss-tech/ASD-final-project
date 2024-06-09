@@ -1,6 +1,8 @@
-[gd_scene load_steps=15 format=3 uid="uid://cqgcwl8m0soko"]
+[gd_scene load_steps=17 format=3 uid="uid://cqgcwl8m0soko"]
 
 [ext_resource type="Script" path="res://suv.gd" id="1_u83y7"]
+[ext_resource type="AudioStream" uid="uid://cxsjnvv7aewsw" path="res://assets/sounds/On.wav" id="2_do5fk"]
+[ext_resource type="AudioStream" uid="uid://um3wi8sfv20a" path="res://assets/sounds/Off.wav" id="3_23p68"]
 
 [sub_resource type="PhysicsMaterial" id="PhysicsMaterial_n1a8v"]
 
@@ -340,3 +342,14 @@ transform = Transform3D(1, 0, -8.74228e-08, 0, 1, 0, -8.74228e-08, 0, -1, 0, 0, 
 gi_mode = 0
 mesh = SubResource("ArrayMesh_qhoey")
 skeleton = NodePath("")
+
+[node name="On" type="AudioStreamPlayer3D" parent="."]
+stream = ExtResource("2_do5fk")
+volume_db = 6.0
+max_db = 6.0
+autoplay = true
+
+[node name="Off" type="AudioStreamPlayer3D" parent="."]
+stream = ExtResource("3_23p68")
+volume_db = 6.0
+max_db = 6.0

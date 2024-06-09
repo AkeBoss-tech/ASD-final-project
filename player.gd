@@ -16,7 +16,8 @@ signal speed_changed(speed)
 @onready var audio_off = $Off
 
 # Threshold to detect acceleration change
-@export var acceleration_threshold := 0.1
+@export var accel_pitch_multi := 50
+@export var decel_pitch_multi := 20
 
 var previous_velocity := Vector3.ZERO
 
@@ -31,6 +32,9 @@ var previous_speed = 0
 func _ready():
 	# Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURE)
 	look_at = global_position
+	audio_on.stop()
+	audio_off.stop()
+	
 
 func _check_camera_switch():
 	if linear_velocity.dot(transform.basis.z) < 0.01:
@@ -69,24 +73,19 @@ func _physics_process(delta):
 	emit_signal("speed_changed", speed)
 
 func _process(delta):
-	# Get the current linear velocity of the vehicle
-	var current_velocity = linear_velocity
-
-	# Calculate acceleration
-	var acceleration = current_velocity.length() - previous_velocity.length()
-
 	# Check if the car is accelerating or decelerating
-	if acceleration > acceleration_threshold:
+	if engine_force > 0:
 		if not audio_on.playing:
 			audio_off.stop()
 			audio_on.play()
-	elif acceleration < -acceleration_threshold:
+	else:
 		if not audio_off.playing:
 			audio_on.stop()
 			audio_off.play()
+			
+	audio_on.pitch_scale = linear_velocity.length() / accel_pitch_multi + 1
+	audio_off.pitch_scale = linear_velocity.length() / decel_pitch_multi + 1
 
-	# Update previous_velocity
-	previous_velocity = current_velocity
 
 func _on_body_entered(body):
 	$crash.play()
