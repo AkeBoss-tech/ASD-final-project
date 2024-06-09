@@ -146,13 +146,15 @@ func _process(delta):
 	if reversing:
 		engine_force = -max_speed
 		steering = 0
+		
+	var angle_difference = abs(steering_angle)
 	
 	# Check if the car is accelerating or decelerating
 	if engine_force > 0:
 		if not audio_on.playing:
 			audio_off.stop()
 			audio_on.play()
-	else:
+	elif angle_difference > steer_slow_threshold:
 		if not audio_off.playing:
 			audio_on.stop()
 			audio_off.play()
