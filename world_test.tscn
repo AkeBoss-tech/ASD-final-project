@@ -11,8 +11,8 @@
 [ext_resource type="PackedScene" uid="uid://dl0vd4tfmtslt" path="res://assets/kenney_racing_kit/billboardDouble_exclusive.glb" id="7_28cv3"]
 [ext_resource type="PackedScene" uid="uid://8w0kv464ykl0" path="res://assets/kenney_racing_kit/camera_exclusive.glb" id="8_c0i2q"]
 [ext_resource type="PackedScene" uid="uid://c6lrrfn2nm60a" path="res://assets/kenney_racing_kit/flagTankco.glb" id="9_d3hnf"]
-[ext_resource type="PackedScene" uid="uid://d1cje8yfqo6f6" path="res://pause_menu.tscn" id="12_4svxx"]
-[ext_resource type="PackedScene" uid="uid://bwc8t3egeaiv7" path="res://results.tscn" id="13_h3seq"]
+[ext_resource type="PackedScene" path="res://pause_menu.tscn" id="12_4svxx"]
+[ext_resource type="PackedScene" path="res://results.tscn" id="13_h3seq"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_wdi7h"]
 sky_top_color = Color(0.570839, 0.541165, 0.916674, 1)
@@ -175,6 +175,7 @@ render_target_update_mode = 4
 [node name="MiniMap" type="Camera3D" parent="race2/HUD/SubViewportContainer/SubViewport"]
 transform = Transform3D(-4.37114e-08, -1, -4.37114e-08, 0, -4.37114e-08, 1, -1, 4.37114e-08, 1.91069e-15, -5.97361, 5.96288, 13.2583)
 projection = 1
+current = true
 size = 60.0
 far = 100.0
 script = ExtResource("4_113li")
@@ -204,10 +205,9 @@ curve = SubResource("Curve3D_u0qpn")
 [node name="PathFollow3D" type="PathFollow3D" parent="RacingLine2"]
 transform = Transform3D(-0.0149986, 0, 0.999887, 0, 1, 0, -0.999887, 0, -0.0149986, -9.38081, 0, 9.9842)
 
-[node name="raceFuture" parent="." node_paths=PackedStringArray("path_follow") instance=ExtResource("4_ei81m")]
+[node name="raceFuture" parent="." instance=ExtResource("4_ei81m")]
 transform = Transform3D(0.02691, 0, 0.999638, 0, 1, 0, -0.999638, 0, 0.02691, -3.42484, 4.50057, 17.9493)
 script = ExtResource("5_a8vmp")
-path_follow = NodePath("../RacingLine/PathFollow3D")
 max_speed = 1500.0
 steering_angle = 0.0
 johnson_carrot = 15
