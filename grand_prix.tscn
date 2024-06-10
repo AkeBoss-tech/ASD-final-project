@@ -89,6 +89,7 @@ script = ExtResource("1_gljak")
 environment = SubResource("Environment_yx4xc")
 
 [node name="RacingLine" type="Path3D" parent="."]
+visible = false
 curve = SubResource("Curve3D_sy0r4")
 
 [node name="PathFollow3D" type="PathFollow3D" parent="RacingLine"]
@@ -235,6 +236,7 @@ uppercase = true
 curve = SubResource("Curve3D_in085")
 
 [node name="RacingLine2" type="Path3D" parent="."]
+visible = false
 curve = SubResource("Curve3D_u0qpn")
 
 [node name="PathFollow3D" type="PathFollow3D" parent="RacingLine2"]
